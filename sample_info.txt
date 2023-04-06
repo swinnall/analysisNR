@@ -1,0 +1,207 @@
+title=ILL_mc3_chol0_polyA_pH3
+fname,contrast,lipid,ratio,label
+#
+# --------------------------------------------------------------------------- #
+# SW MC3: Interal LNP composition ISIS Feb23
+#
+# 0 % chol pH 3 [samples 07-12]
+#ASCII_Feb23_sw2/IvsQ_69776_69777,d2o_hlip,DLin-MC3-DMA,100,0% chol. h-lipid D2O pD3.45
+#ASCII_Feb23_sw2/IvsQ_69778_69779,d2o_dlip,d62-DLin-MC3-DMA,100,0% chol. d-lipid D2O pD3.45
+#ASCII_Feb23_sw2/IvsQ_69780_69781,acmw_dlip,d62-DLin-MC3-DMA,100,0% chol. d-lipid ACMW pH3.00
+#
+# 0 % chol pH 3 w/ polyA
+#ASCII_Feb23_sw2/IvsQ_69786_69787,d2o_hlip_dPolyA,DLin-MC3-DMA,100,0% chol. h-lipid D2O pD3.45 PolyA
+#ASCII_Feb23_sw2/IvsQ_69784_69785,d2o_dlip_dPolyA,d62-DLin-MC3-DMA,100,0% chol. d-lipid D2O pD3.45 PolyA
+#ASCII_Feb23_sw2/IvsQ_69782_69783,acmw_dlip_hPolyA,d62-DLin-MC3-DMA,100,0% chol. d-lipid ACMW pH3.00 PolyA
+#
+#
+# 25 % cholesterol pH 3 [samples 01-06]
+#ASCII_Feb23_sw2/IvsQ_69764_69765,d2o_hlip,DLin-MC3-DMA:Cholesterol,75:25,25% chol. h-lipid D2O pD3.45
+#ASCII_Feb23_sw2/IvsQ_69766_69767,d2o_dlip,d62-DLin-MC3-DMA:d45-Cholesterol,75:25,25% chol. d-lipid D2O pD3.45
+#ASCII_Feb23_sw2/IvsQ_69768_69769,acmw_dlip,d62-DLin-MC3-DMA:d45-Cholesterol,75:25,25% chol. d-lipid ACMW pH3.00
+#
+# 25 % chol pH 3 w/ polyA
+#ASCII_Feb23_sw2/IvsQ_69774_69775,d2o_hlip_dPolyA,DLin-MC3-DMA:Cholesterol,75:25,25% chol. h-lipid D2O pD3.45 PolyA
+#ASCII_Feb23_sw2/IvsQ_69772_69773,d2o_dlip_dPolyA,d62-DLin-MC3-DMA:d45-Cholesterol,75:25,25% chol. d-lipid ACMW pH3.00 PolyA
+#ASCII_Feb23_sw2/IvsQ_69770_69771,acmw_dlip_hPolyA,d62-DLin-MC3-DMA:d45-Cholesterol,75:25,25% chol. d-lipid ACMW pH3.00 PolyA 
+#
+#
+# 43.5 % chol pH 3 [samples 13-18]
+#ASCII_Feb23_sw2/IvsQ_69788_69789,d2o_hlip,DLin-MC3-DMA:Cholesterol,56.5:43.5,43.5% chol. h-lipid D2O pD3.45
+#ASCII_Feb23_sw2/IvsQ_69790_69791,d2o_dlip,d62-DLin-MC3-DMA:d45-Cholesterol,56.5:43.5,43.5% chol. d-lipid D2O pD3.45
+#ASCII_Feb23_sw2/IvsQ_69792_69793,acmw_dlip,d62-DLin-MC3-DMA:d45-Cholesterol,56.5:43.5,43.5% chol. d-lipid ACMW pH3.00
+#
+# 43.5 % chol pH 3 w/ polyA 
+#ASCII_Feb23_sw2/IvsQ_69798_69799,d2o_hlip_dPolyA,DLin-MC3-DMA:Cholesterol,56.5:43.5,43.5% chol. h-lipid D2O pD3.45 PolyA
+#ASCII_Feb23_sw2/IvsQ_69796_69797,d2o_dlip_dPolyA,d62-DLin-MC3-DMA:d45-Cholesterol,56.5:43.5,43.5% chol. d-lipid D2O pD3.45 PolyA
+#ASCII_Feb23_sw2/IvsQ_69794_69795,acmw_dlip_hPolyA,d62-DLin-MC3-DMA:d45-Cholesterol,56.5:43.5,43.5% chol. d-lipid ACMW pH3.00 PolyA
+#
+#
+# 0 % chol pH 7 [samples 25-30]
+#ASCII_Feb23_sw2/IvsQ_69816_69817,d2o_hlip,DLin-MC3-DMA,100,0% chol. h-lipid D2O pD7.85
+#ASCII_Feb23_sw2/IvsQ_69818_69819,d2o_dlip,d62-DLin-MC3-DMA,100,0% chol. d-lipid D2O pD7.85
+#ASCII_Feb23_sw2/IvsQ_69820_69821,acmw_dlip,d62-DLin-MC3-DMA,100,0% chol. d-lipid ACMW pH7.45
+#
+#ASCII_Feb23_sw2/IvsQ_69826_69827,d2o_hlip_dPolyA,DLin-MC3-DMA,100,0% chol. h-lipid D2O pD7.85 PolyA
+#ASCII_Feb23_sw2/IvsQ_69824_69825,d2o_dlip_dPolyA,d62-DLin-MC3-DMA,100,0% chol. d-lipid D2O pD7.85 PolyA
+#ASCII_Feb23_sw2/IvsQ_69822_69823,acmw_dlip_hPolyA,d62-DLin-MC3-DMA,100,0% chol. d-lipid ACMW pH7.40 PolyA
+#
+#
+# 25 % chol pH 7 [samples 19-24]
+#ASCII_Feb23_sw2/IvsQ_69804_69805,d2o_hlip,DLin-MC3-DMA:Cholesterol,75:25,25% chol. h-lipid D2O pD7.85
+#ASCII_Feb23_sw2/IvsQ_69806_69807,d2o_dlip,d62-DLin-MC3-DMA:d45-Cholesterol,75:25,25% chol. d-lipid D2O pD7.85
+#ASCII_Feb23_sw2/IvsQ_69808_69809,acmw_dlip,d62-DLin-MC3-DMA:d45-Cholesterol,75:25,25% chol. d-lipid ACMW pH7.40
+#
+# 25 % chol pH 7 w/ polyA
+#ASCII_Feb23_sw2/IvsQ_69814_69815,d2o_hlip_dPolyA,DLin-MC3-DMA:Cholesterol,75:25,25% chol. h-lipid D2O pD7.85 PolyA
+#ASCII_Feb23_sw2/IvsQ_69812_69813,d2o_dlip_dPolyA,d62-DLin-MC3-DMA:d45-Cholesterol,75:25,25% chol. d-lipid ACMW pH7.85 PolyA
+#ASCII_Feb23_sw2/IvsQ_69810_69811,acmw_dlip_hPolyA_2,d62-DLin-MC3-DMA:d45-Cholesterol,75:25,25% chol. d-lipid ACMW pH7.40 PolyA
+#
+#
+# 43 % chol pH 7 [samples 31-36]
+#ASCII_Feb23_sw2/IvsQ_69828_69829,d2o_hlip,DLin-MC3-DMA:Cholesterol,56.5:43.5,43.5% chol. h-lipid D2O pD7.85
+#ASCII_Feb23_sw2/IvsQ_69830_69831,d2o_dlip,d62-DLin-MC3-DMA:d45-Cholesterol,56.5:43.5,43.5% chol. d-lipid D2O pD7.85
+#ASCII_Feb23_sw2/IvsQ_69832_69833,acmw_dlip,d62-DLin-MC3-DMA:d45-Cholesterol,56.5:43.5,43.5% chol. d-lipid ACMW pH7.40
+#
+# 43 % chol pH 7 w/ polyA
+#ASCII_Feb23_sw2/IvsQ_69838_69839,d2o_hlip_dPolyA,DLin-MC3-DMA:Cholesterol,56.5:43.5,43.5% chol. h-lipid D2O pD7.85 PolyA
+#ASCII_Feb23_sw2/IvsQ_69836_69837,d2o_dlip_dPolyA,d62-DLin-MC3-DMA:d45-Cholesterol,56.5:43.5,43.5% chol. d-lipid D2O pD7.85 PolyA
+#ASCII_Feb23_sw2/IvsQ_69834_69835,acmw_dlip_hPolyA,d62-DLin-MC3-DMA:d45-Cholesterol,56.5:43.5,43.5% chol. d-lipid ACMW pH7.40 PolyA
+#
+#
+# misc 
+#ASCII_Feb23_sw2/IvsQ_69840_69841, acmw
+#ASCII_Feb23_sw2/IvsQ_69843,
+#ASCII_Feb23_sw2/IvsQ_69845,
+#ASCII_Feb23_sw2/IvsQ_69847_69848,bare polyA
+#
+#
+# low Q acmw 
+#ASCII_Mar23_sw3_lowQ/IvsQ_69840_acmw,acmw_hlip,DLin-MC3-DMA,100,ACMW
+#
+# low Q pH 3.0
+#ASCII_Mar23_sw3_lowQ/IvsQ_69780_S09,acmw_dlip_1,d62-DLin-MC3-DMA,100,0% chol. d-lipid ACMW pH3.00 
+#ASCII_Mar23_sw3_lowQ/IvsQ_69782_S10,acmw_dlip_hPolyA_1,d62-DLin-MC3-DMA,100,0% chol. d-lipid ACMW pH3.00 PolyA
+#ASCII_Mar23_sw3_lowQ/IvsQ_69768_S03,acmw_dlip,d62-DLin-MC3-DMA:d45-Cholesterol,75:25,25% chol. d-lipid ACMW pH3.00  
+#ASCII_Mar23_sw3_lowQ/IvsQ_69770_S04,acmw_dlip_hPolyA,d62-DLin-MC3-DMA:d45-Cholesterol,75:25,25% chol. d-lipid ACMW pH3.00 PolyA 
+#ASCII_Mar23_sw3_lowQ/IvsQ_69792_S15,acmw_dlip_2,d62-DLin-MC3-DMA:d45-Cholesterol,56.5:43.5,43.5% chol. d-lipid ACMW pH3.00
+#ASCII_Mar23_sw3_lowQ/IvsQ_69794_S16,acmw_dlip_hPolyA2,d62-DLin-MC3-DMA:d45-Cholesterol,56.5:43.5,43.5% chol. d-lipid ACMW pH3.00 PolyA
+#
+# low Q pH 7.4
+#ASCII_Mar23_sw3_lowQ/IvsQ_69820_S27,acmw_dlip_3,d62-DLin-MC3-DMA,100,0% chol. d-lipid ACMW pH7.40 
+#ASCII_Mar23_sw3_lowQ/IvsQ_69822_S28,acmw_dlip_hPolyA_3,d62-DLin-MC3-DMA,100,0% chol. d-lipid ACMW pH7.40 PolyA
+#ASCII_Mar23_sw3_lowQ/IvsQ_69808_S21,acmw_dlip_4,d62-DLin-MC3-DMA:d45-Cholesterol,75:25,25% chol. d-lipid ACMW pH7.40   
+#ASCII_Mar23_sw3_lowQ/IvsQ_69810_S22,acmw_dlip_hPolyA_4,d62-DLin-MC3-DMA:d45-Cholesterol,75:25,25% chol. d-lipid ACMW pH7.40 PolyA 
+#ASCII_Mar23_sw3_lowQ/IvsQ_69832_S33,acmw_dlip_5,d62-DLin-MC3-DMA:d45-Cholesterol,56.5:43.5,43.5% chol. d-lipid ACMW pH7.40 
+#ASCII_Mar23_sw3_lowQ/IvsQ_69834_S34,acmw_dlip_hPolyA_5,d62-DLin-MC3-DMA:d45-Cholesterol,56.5:43.5,43.5% chol. d-lipid ACMW pH7.40 PolyA
+#
+#
+#
+#
+# --------------------------------------------------------------------------- #
+# 9-13-1016 SW MC3: ILL injetion study 
+#
+# reference MC3 PBS:
+#hMC3-D2O,d2O_hlip,DLin-MC3-DMA,100,0% chol. h-lipid D2O pD7.85
+#dMC3-D2O,d2O_dlip,d62-DLin-MC3-DMA,100,0% chol. d-lipid D2O pD7.85
+#dMC3-ACMW,acmw_dlip,d62-DLin-MC3-DMA,100,0% chol. d-lipid ACMW pH7.40
+#
+# MC3 PBS polyA:
+#hMC3-D2O-polyA-PBS,d2o_hlip_dPolyA,DLin-MC3-DMA,100,0% chol. h-lipid D2O pD7.85 PolyA
+#dMC3-D2O-polyA-PBS,d2o_dlip_dPolyA,d62-DLin-MC3-DMA,100,0% chol. d-lipid D2O pD7.85 PolyA
+#dMC3-ACMW-polyA-PBS,acmw_dlip_hPolyA,d62-DLin-MC3-DMA,100,0% chol. d-lipid ACMW pH7.40 PolyA
+#hMC3-ACMW-polyA-PBS,acmw_hlip_hPolyA,DLin-MC3-DMA,100,0% chol. h-lipid ACMW pH7.40 PolyA
+#
+# MC3-Chol PBS polyA:
+#hMC3-chol-D2O-polyA-PBS,d2o_hlip_dPolyA,DLin-MC3-DMA:Cholesterol,75:25,25% chol. h-lipid D2O pD7.85 PolyA
+#dMC3-chol-D2O-polyA-PBS,d2o_dlip_dPolyA,d62-DLin-MC3-DMA:d45-Cholesterol,75:25,25% chol. d-lipid D2O pD7.85 PolyA
+#dMC3-chol-ACMW-polyA-PBS,acmw_dlip_hPolyA,d62-DLin-MC3-DMA:d45-Cholesterol,75:25,25% chol. d-lipid ACMW pH7.40 PolyA
+#hMC3-chol-ACMW-polyA-PBS,acmw_hlip_hPolyA,DLin-MC3-DMA:Cholesterol,75:25,25% chol. h-lipid ACMW pH7.40 PolyA
+#
+# MC3 Citrate polyA:
+hMC3-D2O-polyA-Citrate,d2o_hlip_dPolyA,DLin-MC3-DMA,100,0% chol. h-lipid D2O pD3.45 PolyA
+dMC3-D2O-polyA-Citrate,d2o_dlip_dPolyA,d62-DLin-MC3-DMA,100,0% chol. d-lipid D2O pD3.45 PolyA
+dMC3-ACMW-polyA-Citrate,acmw_dlip_hPolyA,d62-DLin-MC3-DMA,100,0% chol. d-lipid ACMW pH3.00 PolyA
+hMC3-ACMW-polyA-Citrate,acmw_hlip_hPolyA,DLin-MC3-DMA,100,0% chol. h-lipid ACMW pH3.00 PolyA
+#
+#
+#
+# --------------------------------------------------------------------------- #
+# Alice-March
+#
+#Mar22/S01/IvsQ_65083_65084_S01_pre,acmw_dlip,d31-POPC:DOPE:SM:Cholesterol,40:20:6:34,S01 dEEM-dPOPC ACMW
+#Mar22/S01/IvsQ_65102+65103_65104_S01_post,acmw_dlip_2,d31-POPC:DOPE:SM:Cholesterol,40:20:6:34,S01 dEEM-dPOPC ACMW hLNPs
+#
+#Mar22/S04/IvsQ_65105_65106_S04_pre,acmw_dlip_2,POPC:DOPE:SM:d45-Cholesterol,40:20:6:34,S04 dEEM-dChol ACMW
+#Mar22/S04/IvsQ_65124+65125_65126_S04_post,acmw_dlip_2,POPC:DOPE:SM:d45-Cholesterol,40:20:6:34,S04 dEEM-dChol ACMW hLNPs
+#
+#mar22_struct/S05/IvsQ_65171_65172_S05_pre,acmw_hlip,POPC:DOPE:SM:Cholesterol,40:20:6:34,S05 hEEM ACMW
+#Mar22/S05/IvsQ_65190+65191_65192_S05_post,acmw_hlip_2,POPC:DOPE:SM:Cholesterol,40:20:6:34,S05 hEEM ACMW dMC3-LNPs
+#
+#Mar22/S06/IvsQ_65193_65194_S06_pre,d2o_hlip,POPC:DOPE:SM:Cholesterol,40:20:6:34,S06 hEEM D2O
+#Mar22/S06/IvsQ_65213_65214_S06_post,d2o_hlip_2,POPC:DOPE:SM:Cholesterol,40:20:6:34,S06 hEEM D2O hLNPs
+#
+#Mar22/S02/IvsQ_65145_65146_S02,acmw_hlip_2,POPC:DOPE:SM:Cholesterol,40:20:6:34,S02 hEEM ACMW dDSPC-LNPs
+#
+#Mar22/S03/IvsQ_65164+65165_65166_S03,acmw_hlip_2,POPC:DOPE:SM:Cholesterol,40:20:6:34,S03 hEEM ACMW dChol-LNPs
+#
+#
+#Mar22/S07/IvsQ_binned_65230+65231+65232_S07,acmw_noMono,NA,0,S07 ACMW dMC3-LNPs
+#Mar22/S08/IvsQ_binned_65248+65249+65250_S08,acmw_noMono,NA,0,S08 ACMW dDSPC-LNPs
+#Mar22/S10/IvsQ_binned_65266+65267+65268_S10,acmw_noMono,NA,0,S10 ACMW dChol-LNPs
+#
+#
+#
+# --------------------------------------------------------------------------- #
+# Alice-Sep
+#
+#sep22_composition/S01/IvsQ_67185+67187_67186_S01_pre,acmw_dlip_3,POPC:DOPE:SM:d45-Cholesterol,40:20:6:34,S01 dEEM-dChol ACMW pH 5.5
+#sep22_composition/S01/IvsQ_67188_sliced_8106_9457+67188_sliced_9457_10808+67189_67190_S01_post,acmw_dlip_2,POPC:DOPE:SM:d45-Cholesterol,40:20:6:34,S01 dEEM-dChol ACMW hMC3-LNPs
+#
+#Sep22/S02/IvsQ_67191_67192_S02_pre,acmw_dlip_4,POPC:DOPE:SM:d45-Cholesterol,40:20:6:34,S02 dEEM-dChol ACMW pH 5.5
+#Sep22/S02/IvsQ_67193_sliced_9456.16_10807+67194_67195_S02_post,acmw_dlip_2,POPC:DOPE:SM:d45-Cholesterol,40:20:6:34,S02 dEEM-dChol ACMW hLipid5 LNPs
+#
+#Sep22/S03/IvsQ_67196_67197_S03_pre,acmw_hlip,POPC:DOPE:SM:Cholesterol,40:20:6:34,S03 hEEM ACMW pH 5.5
+#Sep22/S03/IvsQ_67199+67198_sliced_9457_10808_67200_S03_post,acmw_hlip_2,POPC:DOPE:SM:Cholesterol,40:20:6:34,S03 hEEM ACMW pH 5.5 dlipid5-LNPs
+#
+#Sep22/S04/IvsQ_67205+67203_sliced_9456.16_10807_S04_post,acmw_hlip_2,POPC:DOPE:SM:Cholesterol,40:20:6:34,S04 hEEM ACMW pH 5.5 dMC3-LNPs
+#
+#Sep22/S05/IvsQ_65193_65194_S06_pre,d2o_hlip,POPC:DOPE:SM:Cholesterol,40:20:6:34,S06 (March) hEEM D2O pH 5.5
+#Sep22/S05/IvsQ_67207+67206_sliced_9456.16_10807_67208_S05_post,d2o_hlip_2,POPC:DOPE:SM:Cholesterol,40:20:6:34,S05 hEEM D2O pH 5.5 hLipid5-LNPs
+#
+#Sep22/S06/IvsQ_67210+67209_sliced_9456.16_10807_67211_S06_post,acmw_hlip_2,POPC:DOPE:SM:Cholesterol,40:20:6:34,S06 hEEM ACMW pH 5.5 hMC3-LNPs
+#
+#Sep22/S07/IvsQ_67214+67213_sliced_9457_10808_67215_S07_post,acmw_hlip_2,POPC:DOPE:SM:Cholesterol,40:20:6:34,S07 hEEM ACMW pH 5.5 dChol-hLipid5-LNPs
+#
+#Sep22/S08/IvsQ_67219+67218_sliced_2404.66_3606.99_67220_S08_post,acmw_hlip_2,POPC:DOPE:SM:Cholesterol,40:20:6:34,S08 hEEM ACMW pH 5.5 dDSPC-hLipid5-LNPs
+#
+#Sep22/S09/IvsQ_67221_67222_S09_pre,acmw_dlip_5,d31-POPC:DOPE:SM:Cholesterol,40:20:6:34,S09 dEEM-dPOPC ACMW pH 5.5
+#Sep22/S09/IvsQ_67226+67225_sliced_2404.66_3606.99_67227_S09_post,acmw_dlip_2,d31-POPC:DOPE:SM:Cholesterol,40:20:6:34,S09 dEEM-dPOPC ACMW hLipid5-LNPs
+#
+#Sep22/S10/IvsQ_67231+67233+67230_sliced_2404.66_3606.99_67232_S10_post,acmw_hlip_2,POPC:DOPE:SM:Cholesterol,40:20:6:34,S10 hEEM ACMW pH 6.5 dMC3-LNPs
+#
+#Sep22/S11/IvsQ_67237+67236_sliced_2404.66_3606.99_67238_S11_post,acmw_hlip_2,POPC:DOPE:SM:Cholesterol,40:20:6:34,S11 hEEM ACMW pH 6.5 dChol-hMC3-LNPs
+#
+#Sep22/S12/IvsQ_67239_67240_S12_pre,acmw_hlip,POPC:DOPE:SM:Cholesterol,40:20:6:34,S12 hEEM ACMW pH 6.5
+#Sep22/S12/IvsQ_67244+67243_sliced_2404_3606_67245_S12_post,acmw_hlip_2,POPC:DOPE:SM:Cholesterol,40:20:6:34,S12 hEEM ACMW pH 6.5 dDSPC-hMC3-LNPs
+#
+#Sep22/S13/IvsQ_67246_67247_S13_pre,acmw_dlip,POPC:DOPE:SM:d45-Cholesterol,40:20:6:34,S13 dEEM-dChol ACMW pH 6.5
+#Sep22/S13/IvsQ_67251+67250_sliced_2405.34_3608_67252_S13_post,acmw_dlip_2,POPC:DOPE:SM:d45-Cholesterol,40:20:6:34,S13 dEEM-dChol ACMW pH 6.5 hMC3-LNPs
+#
+#Sep22/S14/IvsQ_67256+67255_sliced_2404_3606_67257_S14_post,acmw_hlip_2,POPC:DOPE:SM:Cholesterol,40:20:6:34,S14 hEEM ACMW pH 5.5 hLipid5-LNPs
+#
+#Sep22/S15/can't find structure for hEEM d2o pD 6.9, March data has contrast at pD 5.9
+#Sep22/S15/IvsQ_67261+67260_sliced_2405.34_3608_67262_S15_post,d2o_hlip,POPC:DOPE:SM:Cholesterol,40:20:6:34,S14 hEEM D2O pD 6.9 hMC3-LNPs
+#
+#Sep22/S16/IvsQ_67263_67264_S16_pre,acmw_dlip_2,d31-POPC:DOPE:SM:Cholesterol,40:20:6:34,S16 dEEM-dPOPC ACMW pH 6.5
+#Sep22/S16/IvsQ_67268+67267_sliced_2404.66_3606.99_67269_S16_post,acmw_dlip_2,d31-POPC:DOPE:SM:Cholesterol,40:20:6:34,S16 dEEM-dPOPC ACMW pH 6.5 hMC3-LNPs
+#
+#Sep22/S17/IvsQ_67270_67271_S17_bare,acmw_noMono,NA,0,S17 ACMW pH 6.5
+#
+#Sep22/S18/IvsQ_67275+67274_sliced_2404.66_3606.99_67276_S18_post,acmw_hlip_2,POPC:DOPE:SM:Cholesterol,40:20:6:34,S18 hEEM ACMW pH 6.5 dLipid5-LNPs
+#
+#Sep22/S19/IvsQ_67280+67279_sliced_2405.34_3608_67281_S19_post,acmw_hlip_2,POPC:DOPE:SM:Cholesterol,40:20:6:34,S19 hEEM ACMW pH 6.5 hMC3-LNPs
+#
+#
+#
+#
