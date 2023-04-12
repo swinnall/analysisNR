@@ -1,6 +1,12 @@
 """
 purpose: 
     user interface file to set parameter values for the fitting procedure   
+    
+key:
+    _vary = set parameter to be fitted (True) or fixed (False)
+    _0 = initial value 
+    _lb = lower boundary 
+    _ub = upper boundary 
 """
 
 #########
@@ -25,7 +31,7 @@ useWeights = True
 rough_0 = 3.5
 
 # set a specific roughness for backing media 
-rough_bkg_incl = False 
+rough_bkg_incl = True 
 rough_bkg_0 = 5
 
 # vary the backing media roughness 
@@ -46,11 +52,11 @@ d1_ub = 30
 
 # head thickness (d2) bounds
 d2_vary = False
-d2_0  = 5.2
+d2_0  = 6.5
 d2_lb = 5
 d2_ub = 15
 
-# multiply average chain vol by factor to model lipid chain compaction - CHECK
+# multiply average chain vol by factor to model lipid chain compaction
 compact_chains = False
 compact_chains_factor = 0.85
 
@@ -59,20 +65,20 @@ compact_chains_factor = 0.85
 # Drug #
 ########
 
-# merge drug with headgroup layer, requires vary_d3 = False; check solv2 is physical
+# merge drug with headgroup layer
 with_drug_layer2 = False
 
-# drug in third layer, must set to False if no drug as effects nPars
+# drug in third layer
 with_drug_layer3 = True 
 
 # drug thickness (d3) bounds
 d3_vary = True 
-d3_0  = 20
+d3_0  = 35
 d3_lb = 5
 d3_ub = 50
 
 # solvent fraction of drug layer
-solv3_vary = False
+solv3_vary = True
 solv3_0  = 0.9
 solv3_lb = 0.0
 solv3_ub = 1.0
@@ -82,13 +88,13 @@ solv3_ub = 1.0
 # Subphase #
 ############
 
-# acmw SLD bounds (linked)
+# acmw SLD bounds 
 acmw_vary = False
 acmw_0  = 0.0
 acmw_lb = -0.1
 acmw_ub = 0.1
 
-# d2o SLD bounds (linked)
+# d2o SLD bounds 
 d2o_vary = True
 d2o_0   = 6.36
 d2o_lb  = 6.0
@@ -100,12 +106,12 @@ d2o_ub  = 6.36
 ##############
 
 bkg_d2o_vary = False
-bkg_d2o_0  = 8e-7
+bkg_d2o_0  = 5e-6
 bkg_d2o_lb = 1e-6
 bkg_d2o_ub = 1e-5
 
 bkg_acmw_vary = False
-bkg_acmw_0  = 8e-7
+bkg_acmw_0  = 9e-6
 bkg_acmw_lb = 1e-6
 bkg_acmw_ub = 1e-5
 
@@ -116,14 +122,11 @@ bkg_acmw_ub = 1e-5
 
 doMCMC = False 
 
-# plot mcmc parameter variation
-plotCorner = True if doMCMC == True else False 
-
 # number of burned steps, default = 100 
-MCMC_initSteps = 100 # 100 
+MCMC_initSteps = 100 
 
 # number of saved steps, 15*200 samples (200 default walkers)
-MCMC_nSteps = 15 # 15  
+MCMC_nSteps = 15 
 
 # how much mcmc chains should be thinned before storing (nThin=1 keeps all values)
 MCMC_nThin = 10
@@ -180,17 +183,14 @@ col_light = ['#66B5B3','#C32148','#F38F42','#D4C964',"#CCCCFF",'#CCCCCC','#FFE76
 # dark colours: teal, maroon, orange, green, purple, charcoal, yellow , indigo
 col_dark = ['#116C6E','#8F011B','#C83911','#7D7853',"#3333FF",'#333333','#CCAC00','#273B60']
 
+# size of the experimental datapoints 
+marker_size = 15
 
-#########
-# Paths #
-#########
+# symbol for the experimental data points 
+marker_symbol = 'circle'
 
-# user defined sample info database
-sample_info_str = 'sample_info.txt'
-
-# input folder - too verbose for samplesNR.txt 
-input_sub_list = ['9-13-1016-ILL-MC3','RB2220322-EEM','RB2220338-MC3']
-input_sub_str = input_sub_list[0]
+# thickness of the model line 
+line_width = 5
 
 
 #############

@@ -66,6 +66,17 @@ else:
 
     print('\n\n--------------------------------------------------------------------')
 
+    # print reminders for when merging third and headgroup layers
+    if config.with_drug_layer2 == True and config.d3_vary == False:
+        print('\nReminder: user has fixed d3 while merging with headgroup layer.')
+        print('This introduces the constraint: d3 = config.d3_0 - d2')
+
+    if config.with_drug_layer2 == True and config.d3_vary == True:
+        print('\nReminder: user has fitted d3 while merging with headgroup layer.')
+        print('This means the total drug thickness = d3 + d2')
+
+
+
     print('\nVaried Parameters:')
     for par_vary in global_objective.parameters.varying_parameters():
         print(par_vary.name, "{:.1f}".format(par_vary.value), par_vary.bounds)
@@ -78,6 +89,7 @@ else:
     # print calculated quantities
     print('\nReduced chisqr = %.1f' %reduced_chisq)
     print(f'\nArea per molecule = {APM:.1f} A^2')
+    
 
 
 fig.save_figure(title)

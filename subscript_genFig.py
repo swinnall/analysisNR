@@ -46,9 +46,9 @@ class Figure:
                             showlegend=True,
                             name=inputLabels.get(i),
                             mode='markers',
-                            marker_symbol='circle',
+                            marker_symbol=config.marker_symbol,
                             marker_color=config.col_light[i],
-                            marker=dict(size=20),
+                            marker=dict(size=config.marker_size),
                             )
                         )
     
@@ -59,7 +59,7 @@ class Figure:
                             showlegend=False,
                             name=inputLabels.get(i),
                             mode='lines',
-                            line=dict(width=5,
+                            line=dict(width=config.line_width,
                                       color=config.col_dark[i]),
                             )
                         )

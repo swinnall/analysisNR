@@ -1,6 +1,7 @@
 import pandas as pd
 import csv
-import config
+import os
+import sys
 
 
 def getFile(path,nSkip,delim):
@@ -50,11 +51,11 @@ def getSampleInfo():
     contrastList = []
     
     # get the title of sample info file 
-    with open(config.sample_info_str, newline='') as f:
+    with open('sample_info.txt', newline='') as f:
         title = list(csv.reader(f))[0][0].split('=')[1]
     
     # get the sample info file 
-    sampleInfoFile = getFile(path=config.sample_info_str, nSkip=1, delim=',')
+    sampleInfoFile = getFile(path='sample_info.txt', nSkip=1, delim=',')
     
     # calculate number of files in sample info
     nFiles = len(sampleInfoFile)
@@ -62,12 +63,29 @@ def getSampleInfo():
     # for each file get the sample specific information and store in dicts
     for i in range(nFiles):
 
+        # get and store contrast information, used for all sample identification
         contrast = sampleInfoFile["contrast"][i]
         contrastList.append(contrast)
+        
+        # find full path of sample data and store in filePaths
+        file_path_str = ''
+        for root,dirs,files in os.walk('../input/'): 
+            
+            # iterate through all of the file names 
+            for name in files:
+                
+                # if a match exists then store 
+                if name == sampleInfoFile["fname"][i] + ".txt":
+                    file_path_str = os.path.join(root,name)
+                    filePaths[contrast] = file_path_str
+        
+        # if file path has not been updated then the file has not been found 
+        if file_path_str == '':
+            print('\nFatal Error: file not found.')
+            sys.exit()
 
-        filePaths[contrast] = "../input/" + config.input_sub_str + '/' + sampleInfoFile["fname"][i] + ".txt"
+        # store remaining sample information based on sample contrast
         inputLabels[contrast] = sampleInfoFile["label"][i]
-
         lipids[contrast] = sampleInfoFile["lipid"][i]
         ratios[contrast] = sampleInfoFile["ratio"][i]
 
@@ -104,16 +122,15 @@ def getExperimentalData(file_paths, inputLabels, contrastList, nContrasts):
     for i in range(nContrasts):
         contrast = contrastList[i]
 
-        if file_paths.get(contrast) is not None:
-            experimentFile = getFile(path=file_paths.get(contrast), nSkip=1, delim='\t')
+        experimentFile = getFile(path=file_paths.get(contrast), nSkip=1, delim='\t')
 
-            expQ[i] = experimentFile[experimentFile.columns.values[0]]
-            expNR[i] = experimentFile[experimentFile.columns.values[1]]
-            expNR_err[i] = experimentFile[experimentFile.columns.values[2]]
-            labels[i] = inputLabels.get(contrast)
-            
-            qmin[contrast] = min(expQ.get(i))
-            qmax[contrast] = max(expQ.get(i))
+        expQ[i] = experimentFile[experimentFile.columns.values[0]]
+        expNR[i] = experimentFile[experimentFile.columns.values[1]]
+        expNR_err[i] = experimentFile[experimentFile.columns.values[2]]
+        labels[i] = inputLabels.get(contrast)
+        
+        qmin[contrast] = min(expQ.get(i))
+        qmax[contrast] = max(expQ.get(i))
     
     return expQ, expNR, expNR_err, labels, qmin, qmax
 

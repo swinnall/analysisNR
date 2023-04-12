@@ -175,16 +175,10 @@ class Model:
             print('\nFatal Error: Atempted to create drug layer but no polyA in contrast.\nCheck spelling!')
             sys.exit()
 
-        # calculate drug layer thickness 
+        # if not fitting drug layer thickness, constrain it 
         if config.with_drug_layer2 == True and config.d3_vary == False: 
             self.thickness_drug.constraint = config.d3_0 - self.thickness_heads
          
-        elif config.with_drug_layer2 == True and config.d3_vary == True:
-            print("\nFatal Error: Can't fit d3 due to circular dependency.")
-            print("User intended:\n  thickness_drug.constraint = thickness_drug - thickness_heads")
-            print("Set config.vary_d3 = False and relaunch program.\n")
-            sys.exit() 
-                
         # calculate the volume fraction of the drug layer 
         self.vfDrug  = 1 - self.drug_solvent
         
@@ -564,14 +558,12 @@ def fitModel(title, file_paths, contrast_list, qmin_, qmax_, lipids, ratios):
         # MCMC - production run - save 1 in 100 samples to remove autocorrelation, save 15 stes giving 15*200 samples (200 walkers by default)
         res = fitter.sample(config.MCMC_nSteps, nthin=config.MCMC_nThin, random_state=1, pool=-1)
         
-   
         # plot corner plot to show covariance between parameters 
-        if config.plotCorner == True:
-            global_objective.corner()
-            plt.savefig('../output/corner-' +title+'.png',
-                format='png',
-                dpi=400,
-                bbox_inches='tight')    
+        global_objective.corner()
+        plt.savefig('../output/corner-' +title+'.png',
+            format='png',
+            dpi=400,
+            bbox_inches='tight')    
         
 
 
