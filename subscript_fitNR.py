@@ -56,8 +56,8 @@ class Model:
         
         # SLD constant (based on reasonable guess) and solvent fixed at 0 
         if config.surface_excess_mode == True:
-            self.rho_single = SLD(config.sld_single_0, name='SLD_single_layer')
-            self.single_solvent = Parameter(0.0, name='Solv_single_layer')
+            self.rho_slab = SLD(config.sld_slab_0, name='SLD_slab_layer')
+            self.slab_solvent = Parameter(0.0, name='Solv_slab_layer')
         
         
         # define lists for data
@@ -80,7 +80,7 @@ class Model:
         self.ratio = ratio       
         
         # extract system information from contrast
-        self.subphase = self.contrast[0].upper()
+        self.subphase = self.contrast[0]
         
        
         
@@ -165,10 +165,10 @@ class Model:
     def define_drug_layer(self):
         
         # define SLD parameters for hydrogenous and deuterated polyA components 
-        if 'hPolyA' in self.contrast:
+        if 'HPOLYA' in self.contrast:
             self.rho_drug = Parameter(3.67, name='SLD3-h')
             
-        elif 'dPolyA' in self.contrast:
+        elif 'DPOLYA' in self.contrast:
             self.rho_drug = Parameter(4.46, name='SLD3-d') 
             
         else:
@@ -248,17 +248,17 @@ class Model:
             self.drug_layer = self.drug(self.thickness_drug,self.roughness,self.drug_solvent)
                 
 
-        # create single 'average' layer 
+        # create single 'slab' layer 
         if config.surface_excess_mode == True:
             
             # create thickness parameter for the layer 
-            self.thickness_single = Parameter(config.d_single_0, bounds=(config.d_single_lb,config.d_single_ub), vary=config.d_single_vary, name='Single Layer Thickness')            
+            self.thickness_slab = Parameter(config.d_slab_0, bounds=(config.d_slab_lb,config.d_slab_ub), vary=config.d_slab_vary, name='Slab Layer Thickness')            
 
             # create SLD object 
-            self.single = SLD(self.rho_single, name='SLD_average_layer')
+            self.slab = SLD(self.rho_slab, name='SLD_average_layer')
             
             # create slab
-            self.single_layer = self.single(self.thickness_single,self.roughness,self.single_solvent)
+            self.slab_layer = self.slab(self.thickness_slab,self.roughness,self.slab_solvent)
 
 
 
@@ -279,7 +279,7 @@ class Model:
             structure = self.air | self.tails_layer | self.heads_layer | self.drug_layer | self.subphase_layer     
 
         elif config.surface_excess_mode == True:
-            structure = self.air | self.single_layer | self.subphase_layer 
+            structure = self.air | self.slab_layer | self.subphase_layer 
 
         else: 
             structure = self.air | self.tails_layer | self.heads_layer | self.subphase_layer    
@@ -343,17 +343,17 @@ def calcParNum(contrast_list):
         subphase = contrast.split('_')[0]
 
         # one parameter per instrument background 
-        if subphase.upper() == 'ACMW' and config.bkg_acmw_vary == True:
+        if subphase == 'ACMW' and config.bkg_acmw_vary == True:
             nPars += 1
 
-        if subphase.upper() == 'D2O' and config.bkg_d2o_vary == True:
+        if subphase == 'D2O' and config.bkg_d2o_vary == True:
             nPars += 1
         
         # one parameter per subphase SLD
-        if subphase.upper() == 'ACMW' and config.acmw_vary == True:
+        if subphase == 'ACMW' and config.acmw_vary == True:
             nPars += 1
              
-        if subphase.upper() == 'D2O' and config.d2o_vary == True:
+        if subphase == 'D2O' and config.d2o_vary == True:
             nPars += 1
             
     # one parameter per thickness 

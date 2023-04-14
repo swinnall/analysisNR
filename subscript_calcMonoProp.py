@@ -12,7 +12,7 @@ class Monolayer:
     input: 
         lipidNames = list of lipid component names 
         molRatios = list of molar % amounts of the respective lipids 
-        thickness = dictionary of head and tail thicknesses
+        thickness = dictionary of head and tails thicknesses
         monolayerPar = tuple of dicts (needed if adding another component to the monolayer)
 
     output: 
@@ -37,9 +37,8 @@ class Monolayer:
         self.monolayerSLD    = monolayerPar[2]
 
         # import databases
-        self.lipidStruct = config.lipidStruct
-        self.atomSL      = config.atomSL
-        self.lipidMolVol = config.lipidMolVol
+        self.atomSL        = config.atomSL
+        self.lipidDatabase = config.lipid_database 
 
         # initialise new variables
         self.headVolFrac        = 0
@@ -83,8 +82,8 @@ class Monolayer:
         for i, lipid in enumerate(self.lipidNames):
 
             # check lipid exists in database
-            if self.lipidStruct.get(lipid) == None and lipid == "Monolayer": pass
-            elif self.lipidStruct.get(lipid) == None:
+            if self.lipidDatabase.get(lipid) == None and lipid == "Monolayer": pass
+            elif self.lipidDatabase.get(lipid) == None:
                 print("\nError: Lipid type not found in Lipid Molecular Formula Database.")
                 print("Lipid: %s" %lipid)
                 sys.exit()
@@ -95,7 +94,7 @@ class Monolayer:
                 if lipid == "Monolayer":
                     self.totalLipidVol[struct] += self.normMolRatios[i] * self.monolayerMolVol[struct]
                 else:
-                    self.totalLipidVol[struct] += self.normMolRatios[i] * self.lipidMolVol.get(lipid)[j]
+                    self.totalLipidVol[struct] += self.normMolRatios[i] * self.lipidDatabase.get(lipid).get('mvol').get(struct)
 
 
         # save Monolayer monolayer struct volumes on the first iteration
@@ -113,7 +112,7 @@ class Monolayer:
     def calcSL(self):
 
         for i, lipid in enumerate(self.lipidNames):
-            self.lipidSL[lipid]       = {'head': 0, 'tails': 0}
+            self.lipidSL[lipid] = {'head': 0, 'tails': 0}
 
             for j, struct in enumerate(['head','tails']):
 
@@ -121,10 +120,10 @@ class Monolayer:
                     self.lipidSL[lipid][struct] = self.monolayerSL.get(struct)
 
                 else:
-                    # splits head/tail into list of constituent atoms
-                    splitStruct = re.split('-', self.lipidStruct.get(lipid)[j])
+                    # splits head/tails into list of constituent atoms
+                    splitStruct = re.split('-', self.lipidDatabase.get(lipid).get('struct').get(struct))
 
-                    # this loop iterates across elements in a given head/tail and sums the atomic scattering lengths
+                    # this loop iterates across elements in a given head/tails and sums the atomic scattering lengths
                     for ele in splitStruct:
 
                         # multiply scattering length of atom by number of atoms
@@ -141,7 +140,7 @@ class Monolayer:
                             self.lipidSL[lipid][struct] += self.atomSL.get(ele[0])
 
 
-                # multiply total lipid scattering length of a given lipid's head/tail by corresponding vol frac
+                # multiply total lipid scattering length of a given lipid's head/tails by corresponding vol frac
                 self.avSL[struct] += self.normMolRatios[i] * self.lipidSL[lipid][struct]
 
 
@@ -173,7 +172,7 @@ class Monolayer:
                 if lipid == "Monolayer":
                     self.avLipidVol[struct] += self.normMolRatios[i] * self.monolayerMolVol[struct]
                 else:
-                    self.avLipidVol[struct] += self.normMolRatios[i] * self.lipidMolVol.get(lipid)[j]
+                    self.avLipidVol[struct] += self.normMolRatios[i] * self.lipidDatabase.get(lipid).get('mvol').get(struct)
 
 
         # if accounting for chain compaction
@@ -272,7 +271,7 @@ def calc_monolayer_prop(calcType,membrane,lipidRatio,t_thick,h_thick):
         calcType = the type of analysis intended (SL, SLD or head_vol)
         membrane = the string of lipids for a given sample 
         lipidRatio = the string of ratios for each lipid component 
-        t_thick = tail thickness (only needed for head_solv calculation)
+        t_thick = tails thickness (only needed for head_solv calculation)
         h_thick = head thickness (only needed for head_solv calculation)
     
     analysis:
