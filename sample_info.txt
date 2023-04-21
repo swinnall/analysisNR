@@ -1,4 +1,4 @@
-title=mc3_chol0_ref_pH3
+title=alice_april_test
 fname,contrast,lipid,ratio,label
 #
 # EXAMPLE 
@@ -8,9 +8,9 @@ fname,contrast,lipid,ratio,label
 # SW mc3: Interal LNP composition ISIS Feb23
 #
 # 0 % chol pH 3 [samples 07-12]
-IvsQ_69776_69777,d2o_hlipid,mc3,100,0% chol. h-lipid D2O pD3.45
-IvsQ_69778_69779,d2o_dlipid,d62_mc3,100,0% chol. d-lipid D2O pD3.45
-IvsQ_69780_69781,acmw_dlipid,d62_mc3,100,0% chol. d-lipid ACMW pH3.00
+#IvsQ_69776_69777,d2o_hlipid,mc3,100,0% chol. h-lipid D2O pD3.45
+#IvsQ_69778_69779,d2o_dlipid,d62_mc3,100,0% chol. d-lipid D2O pD3.45
+#IvsQ_69780_69781,acmw_dlipid,d62_mc3,100,0% chol. d-lipid ACMW pH3.00
 #
 # 0 % chol pH 3 w/ polyA
 #IvsQ_69786_69787,d2o_hlipid_dPolyA,mc3,100,0% chol. h-lipid D2O pD3.45 PolyA
@@ -130,7 +130,7 @@ IvsQ_69780_69781,acmw_dlipid,d62_mc3,100,0% chol. d-lipid ACMW pH3.00
 #
 #
 # --------------------------------------------------------------------------- #
-# Alice-March
+# Alice-March (2022)
 #
 #IvsQ_65083_65084_S01_pre,acmw_dlipid,d31-POPC:DOPE:SM:chol,40:20:6:34,S01 dEEM-dPOPC ACMW
 #IvsQ_65102+65103_65104_S01_post,acmw_dlip_2,d31-POPC:DOPE:SM:chol,40:20:6:34,S01 dEEM-dPOPC ACMW hLNPs
@@ -156,7 +156,7 @@ IvsQ_69780_69781,acmw_dlipid,d62_mc3,100,0% chol. d-lipid ACMW pH3.00
 #
 #
 # --------------------------------------------------------------------------- #
-# Alice-Sep
+# Alice-Sep (2022)
 #
 #IvsQ_67185+67187_67186_S01_pre,acmw_dlipid_3,POPC:DOPE:SM:d45_chol,40:20:6:34,S01 dEEM-dChol ACMW pH 5.5
 #IvsQ_67188_sliced_8106_9457+67188_sliced_9457_10808+67189_67190_S01_post,acmw_dlipid_2,POPC:DOPE:SM:d45_chol,40:20:6:34,S01 dEEM-dChol ACMW hmc3-LNPs
@@ -204,6 +204,55 @@ IvsQ_69780_69781,acmw_dlipid,d62_mc3,100,0% chol. d-lipid ACMW pH3.00
 #IvsQ_67275+67274_sliced_2404.66_3606.99_67276_S18_post,acmw_hlipid_2,POPC:DOPE:SM:chol,40:20:6:34,S18 hEEM ACMW pH 6.5 dLipid5-LNPs
 #
 #IvsQ_67280+67279_sliced_2405.34_3608_67281_S19_post,acmw_hlipid_2,POPC:DOPE:SM:chol,40:20:6:34,S19 hEEM ACMW pH 6.5 hmc3-LNPs
+#
+#
+# --------------------------------------------------------------------------- #
+# Alice-April (2023)         
+#
+# D2O
+#IvsQ_70822+70823_70824,d2o
+#
+# ACMW 
+#IvsQ_70829_70830,acmw,
+#
+# ACMW hEMM P=15 before LNP addition pH 6.5 
+IvsQ_70831_70832,acmw,POPC:DOPE:SM:chol,40:20:6:34,hEEM ACMW pH 6.5
+# 
+# ACMW hEMM 6.5 P=15 after 25m 6s injection of d-DSPC/Lipid V/LNPs post-kinetic
+#IvsQ_70839_70840,acmw_hlipid,POPC:DOPE:SM:chol,40:20:6:34,hEEM ACMW pH 6.5 d-DSPC h-Lipid5 LNPs
+# 
+# ACMW hEMM 6.5 P=15 after injection of d-MC3/LNPs post-kinetic
+#IvsQ_70847_70848,acmw_hlipid,POPC:DOPE:SM:chol,40:20:6:34,hEEM ACMW pH 6.5 d-MC3 LNPs
+#
+# ACMW hEMM 6.5 P=15 after injection of h-Lipid V/LNPs post-kinetic
+#IvsQ_70855_70856,acmw_hlipid,POPC:DOPE:SM:chol,40:20:6:34,hEEM ACMW pH 6.5 h-Lipid5 LNPs
+#
+# D2O 6.9 P=15 before addition of h-LNP to h-EMMM 
+IvsQ_70857_70858,d2o_hlipid,POPC:DOPE:SM:chol,40:20:6:34,hEEM D2O pD 6.9
+#
+# D2O 6.9 P=15 after injection of 24m 26s h-Lipid V/LNPs post-kinetic
+#IvsQ_70865+70866_70867,d2o_hlipid,POPC:DOPE:SM:chol,40:20:6:34,hEEM D2O pD 6.9 h-Lipid5 LNPs
+#
+# ACMW pH 5.5 h-EEM P=15 after 25m 3s injection of d-MC3 LNPs post-kinetic
+#IvsQ_70874_70875,acmw_hlipid,POPC:DOPE:SM:chol,40:20:6:34,hEEM ACMW pH 5.5 d-MC3 LNPs
+#
+# ACMW pH 6.5 h-EEM P=15 after 24m 59s injection of d-chol/Lipid V/LNPs post-kinetic
+#IvsQ_70882_70883,acmw_hlipid,POPC:DOPE:SM:chol,40:20:6:34,hEEM ACMW pH 6.5 d-chol h-Lipid5 LNPs
+#
+# ACMW pH 6.5 d-POPC-EEM 26m 22s P=15 before addition of LNP to d-POPC EMM
+#IvsQ_70888_70889,acmw_dlipid,d31_POPC:DOPE:SM:chol,40:20:6:34,d-POPC EEM ACMW pH 6.5
+#
+# ACMW pH 6.5 d-POPC-EEM P=15 after injection of h-Lipid V/LNPs post-kinetic
+#IvsQ_70895_70896,acmw_dlipid,d31_POPC:DOPE:SM:chol,40:20:6:34,d-POPC EEM ACMW pH 6.5 h-Lipid5 LNPs
+#
+# ACMW pH 6.5 d-chol-EEM P=15 25m 20s before addition of LNP to d-chol EMM
+#IvsQ_70897_70898,acmw_dlipid,POPC:DOPE:SM:d45_chol,40:20:6:34,d-chol EEM ACMW pH 6.5
+#
+# ACMW pH 6.5 d-chol-EEM P=15 25m 18s after injection of h-Lipid V/LNPs post-kinetic
+#IvsQ_70905_70906,acmw_dlipid,POPC:DOPE:SM:d45_chol,40:20:6:34,d-chol EEM ACMW pH 6.5 h-Lipid5 LNPs
+#
+#
+#
 #
 #
 #

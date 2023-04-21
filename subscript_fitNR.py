@@ -8,6 +8,7 @@ from scipy import integrate
 import numpy as np
 import functools 
 import sys
+import pandas as pd
 
 from subscript_calcMonoProp import calc_monolayer_prop
 import config
@@ -445,7 +446,7 @@ def writeParams(parameter_output_str, reduced_chisq, global_objective):
     return        
         
 
-def fitModel(title, file_paths, contrast_list, qmin_, qmax_, lipids, ratios):
+def fitModel(title, sampleInfo):
 
     """
     purpose: 
@@ -456,16 +457,10 @@ def fitModel(title, file_paths, contrast_list, qmin_, qmax_, lipids, ratios):
         
     input: 
         title = the title of the analysis, used for saving outputs 
-        file_paths = dict of file locations by contrast key 
-        contrast_list = list of sample contrasts (NB: each contrast must be different, e.g. _1,_2...)
-        qmin_ = dict of the minimum q value for a given contrast key 
-        qmax_ = dict of the maximum q value for a given contrast key 
-        lipids = dict of component lipids string for a given contrast key 
-        ratios = dict of component ratios string for a given contrast key 
+        sampleInfo = pandas dataframe where each row is one sample 
 
     output: 
-        modelQ = dict of the generated Q vales (x-axis), key is index
-        modelNR = dict of the generated R vales (y-axis), key is index
+        sampleInfo = updated dataframe to include the model NR data 
         global_objective = the final parameter solution 
         reduced_chisq = the reduced chi-squared value of the co-refined data 
         APM = area per molecule of the co-refined data 
@@ -476,13 +471,13 @@ def fitModel(title, file_paths, contrast_list, qmin_, qmax_, lipids, ratios):
     M = Model()
     
     # iterate across each contrast 
-    for contrast in contrast_list:
-        
-        # access experiment data file, lipid and ratio
-        file, lipid, ratio = file_paths.get(contrast), lipids.get(contrast), ratios.get(contrast)
-        
+    for path, contrast, lipid, ratio in zip(sampleInfo['filePath'],\
+                                            sampleInfo['contrast'],\
+                                            sampleInfo['lipid'],\
+                                            sampleInfo['ratio']): 
+
         # load the information into the class 
-        M.load_contrast(file, contrast, lipid, ratio)
+        M.load_contrast(path, contrast, lipid, ratio)
         
         # generate the subphase slab 
         M.make_backing_slab()
@@ -542,9 +537,9 @@ def fitModel(title, file_paths, contrast_list, qmin_, qmax_, lipids, ratios):
     fitter.fit('differential_evolution', constraints=(thickness_constraint));
         
     # calculate reduced chi square value 
-    reduced_chisq = calc_reduced_chisq(M.exp_list, global_objective, contrast_list)
+    reduced_chisq = calc_reduced_chisq(M.exp_list, global_objective, sampleInfo['contrast'])
  
-    
+
  
 
     ## Markov Chain Monte Carlo 
@@ -570,31 +565,32 @@ def fitModel(title, file_paths, contrast_list, qmin_, qmax_, lipids, ratios):
     # print output if running in verbose mode 
     if config.verbose == True:
         print('\n\n\n', global_objective)
-        reduced_chisq = calc_reduced_chisq(M.exp_list, global_objective, contrast_list)
+        reduced_chisq = calc_reduced_chisq(M.exp_list, global_objective, sampleInfo['contrast'])
 
 
 
     ## Generate model data 
     
-    modelQ  = {}
-    modelNR = {}
+    modelQ_list, modelNR_list = [], []
     
     for idx, model_data in enumerate(M.model_list):
         
-        # get relevant contrast 
-        contrast = contrast_list[idx]
-        
-        # get min and max q values 
-        qmin, qmax = qmin_.get(contrast), qmax_.get(contrast)
-        
+        # get min and max q values  
+        qmin, qmax = sampleInfo['qmin'][idx], sampleInfo['qmax'][idx]
+
         # generate model q data
-        q = list(np.linspace(qmin, qmax, 1001)) 
+        q = pd.Series(np.linspace(qmin, qmax, 1001)) 
         
         # generate model data 
-        modelQ[idx] = q
-        modelNR[idx] = list(model_data(q))
+        modelQ_list.append(q)
+        modelNR_list.append(pd.Series(model_data(q)))
     
+    # load into dataframe 
+    sampleInfo['Q_model'] = modelQ_list 
+    sampleInfo['R_model'] = modelNR_list 
     
+
+
     
     ## Calculate APM
     
@@ -642,7 +638,7 @@ def fitModel(title, file_paths, contrast_list, qmin_, qmax_, lipids, ratios):
             #print(struct_SLD)
             
             # quick plot of SLD data 
-            ax.plot(struct_z, struct_SLD, label=contrast_list[idx])
+            ax.plot(struct_z, struct_SLD, label=sampleInfo['contrast'][idx])
    
             # integrate datasets, y then x ordering, should only consider positive values
             I = integrate.simpson(abs(struct_SLD), struct_z)
@@ -672,4 +668,4 @@ def fitModel(title, file_paths, contrast_list, qmin_, qmax_, lipids, ratios):
         
         
         
-    return modelQ, modelNR, global_objective, reduced_chisq, APM
+    return sampleInfo, global_objective, reduced_chisq, APM

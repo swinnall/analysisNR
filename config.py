@@ -28,7 +28,7 @@ useWeights = True
 #############
 
 # set roughness for all layers
-rough_0 = 3.5
+rough_0 = 3.1
 
 # set a specific roughness for backing media 
 rough_bkg_incl = False 
@@ -105,13 +105,13 @@ d2o_ub  = 6.36
 # Background #
 ##############
 
-bkg_d2o_vary = False
+bkg_d2o_vary = True
 bkg_d2o_0  = 5e-6
 bkg_d2o_lb = 1e-6
 bkg_d2o_ub = 1e-5
 
-bkg_acmw_vary = False
-bkg_acmw_0  = 9e-6
+bkg_acmw_vary = True
+bkg_acmw_0  = 6.5e-6
 bkg_acmw_lb = 1e-6
 bkg_acmw_ub = 1e-5
 

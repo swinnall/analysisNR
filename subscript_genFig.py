@@ -11,7 +11,7 @@ class Figure:
         generate figures for fitting analysis 
         
     input: 
-        experimental and/or model data from fitNR function
+        experimental and/or model data from fitNR function via sampleInfo
         
     output: 
         savefig method stores the figure in ../ouptut/~
@@ -27,44 +27,51 @@ class Figure:
 
 
 
-    def plotStruct(self,Q,expNR,expNR_err,modelQ,modelNR,inputLabels,title,row=1,col=1,showlegend=False):
+    def plotStruct(self,title,sampleInfo,row=1,col=1,showlegend=False):
 
         # initialise figure 
         self.fig = go.Figure()
         
-        nFiles = len(Q)
-        for i in range(nFiles):
+        # sample number index for indexing against the colour lists in config
+        idx_colour = 0
+        
+
+        for Q_exp, R_exp, R_err_exp, Q_model, R_model, label in zip(\
+                sampleInfo['Q_exp'],sampleInfo['R_exp'],sampleInfo['R_err_exp'],\
+                sampleInfo['Q_model'],sampleInfo['R_model'],sampleInfo['label'],\
+                ):
     
             # plot experimental data points on top of the model trace
             self.fig.add_trace(go.Scatter(
-                            x=Q.get(i),
-                            y=expNR.get(i),
+                            x=Q_exp,
+                            y=R_exp,
                             error_y=dict(
                                     type='data', # value of error bar given in data coordinates
-                                    array=expNR_err.get(i),
+                                    array=R_err_exp,
                                     visible=True),
                             showlegend=True,
-                            name=inputLabels.get(i),
+                            name=label,
                             mode='markers',
                             marker_symbol=config.marker_symbol,
-                            marker_color=config.col_light[i],
+                            marker_color=config.col_light[idx_colour],
                             marker=dict(size=config.marker_size),
                             )
                         )
     
             # add model trace 
             self.fig.add_trace(go.Scatter(
-                            x=modelQ.get(i),
-                            y=modelNR.get(i),
+                            x=Q_model,
+                            y=R_model,
                             showlegend=False,
-                            name=inputLabels.get(i),
+                            name=label,
                             mode='lines',
                             line=dict(width=config.line_width,
-                                      color=config.col_dark[i]),
+                                      color=config.col_dark[idx_colour]),
                             )
                         )
-
-
+            
+            # update index to move to next colour 
+            idx_colour += 1
 
 
         self.fig.update_layout(font=dict(family='Latex',
@@ -129,13 +136,14 @@ class Figure:
 
 
 
-    def plotExcess(self,contrastList, global_objective):
+    def plotExcess(self, sampleInfo, global_objective):
         
+        
+        # store each fitted parameter (thickness left to vary, SLD constant) in list 
         rho_d_list = []
-        for i in range(len(contrastList)):
-    
-            # store each fitted parameter (thickness left to vary, SLD constant) in list 
+        for i in range(len(sampleInfo)):
             rho_d_list.append(global_objective.parameters.varying_parameters()[i].value)  
+    
     
         print("\n\nScattering excess (rho*d) values:")
         print(*rho_d_list, sep ='\n')
