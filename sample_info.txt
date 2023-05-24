@@ -1,8 +1,14 @@
-title=alice_april_test
+title=sld_calc_tests
 fname,contrast,lipid,ratio,label
 #
-# EXAMPLE 
+# EXAMPLE
 # file_name,subphase_lipid,lipid1:lipid2,ratio1:ratio2,label_description
+#
+#
+# lipid calculations test
+#IvsQ_69776_69777,d2o_hlipid_hpolya,popc:chol,7:3,test
+#IvsQ_69776_69777,d2o_hlipid_hpolya,chol,7,test
+IvsQ_69776_69777,d2o_hlipid_hpolya,d45_chol,7,test
 #
 # --------------------------------------------------------------------------- #
 # SW mc3: Interal LNP composition ISIS Feb23
@@ -25,8 +31,8 @@ fname,contrast,lipid,ratio,label
 #
 # 25 % chol pH 3 w/ polyA
 #IvsQ_69774_69775,d2o_hlipid_dPolyA,mc3:chol,75:25,25% chol. h-lipid D2O pD3.45 PolyA
-#IvsQ_69772_69773,d2o_dlipid_dPolyA,d62_mc3:d45_chol,75:25,25% chol. d-lipid ACMW pH3.00 PolyA
-#IvsQ_69770_69771,acmw_dlipid_hPolyA,d62_mc3:d45_chol,75:25,25% chol. d-lipid ACMW pH3.00 PolyA 
+#IvsQ_69772_69773,d2o_dlipid_dPolyA,d62_mc3:d45_chol,75:25,25% chol. d-lipid D2O pD3.45 PolyA
+#IvsQ_69770_69771,acmw_dlipid_hPolyA,d62_mc3:d45_chol,75:25,25% chol. d-lipid ACMW pH3.00 PolyA
 #
 #
 # 43.5 % chol pH 3 [samples 13-18]
@@ -34,7 +40,7 @@ fname,contrast,lipid,ratio,label
 #IvsQ_69790_69791,d2o_dlipid,d62_mc3:d45_chol,56.5:43.5,43.5% chol. d-lipid D2O pD3.45
 #IvsQ_69792_69793,acmw_dlipid,d62_mc3:d45_chol,56.5:43.5,43.5% chol. d-lipid ACMW pH3.00
 #
-# 43.5 % chol pH 3 w/ polyA 
+# 43.5 % chol pH 3 w/ polyA
 #IvsQ_69798_69799,d2o_hlipid_dPolyA,mc3:chol,56.5:43.5,43.5% chol. h-lipid D2O pD3.45 PolyA
 #IvsQ_69796_69797,d2o_dlipid_dPolyA,d62_mc3:d45_chol,56.5:43.5,43.5% chol. d-lipid D2O pD3.45 PolyA
 #IvsQ_69794_69795,acmw_dlipid_hPolyA,d62_mc3:d45_chol,56.5:43.5,43.5% chol. d-lipid ACMW pH3.00 PolyA
@@ -45,6 +51,7 @@ fname,contrast,lipid,ratio,label
 #IvsQ_69818_69819,d2o_dlipid,d62_mc3,100,0% chol. d-lipid D2O pD7.85
 #IvsQ_69820_69821,acmw_dlipid,d62_mc3,100,0% chol. d-lipid ACMW pH7.45
 #
+# 0 % chol pH 7 w/ polyA
 #IvsQ_69826_69827,d2o_hlipid_dPolyA,mc3,100,0% chol. h-lipid D2O pD7.85 PolyA
 #IvsQ_69824_69825,d2o_dlipid_dPolyA,d62_mc3,100,0% chol. d-lipid D2O pD7.85 PolyA
 #IvsQ_69822_69823,acmw_dlipid_hPolyA,d62_mc3,100,0% chol. d-lipid ACMW pH7.40 PolyA
@@ -57,7 +64,7 @@ fname,contrast,lipid,ratio,label
 #
 # 25 % chol pH 7 w/ polyA
 #IvsQ_69814_69815,d2o_hlipid_dPolyA,mc3:chol,75:25,25% chol. h-lipid D2O pD7.85 PolyA
-#IvsQ_69812_69813,d2o_dlipid_dPolyA,d62_mc3:d45_chol,75:25,25% chol. d-lipid ACMW pH7.85 PolyA
+#IvsQ_69812_69813,d2o_dlipid_dPolyA,d62_mc3:d45_chol,75:25,25% chol. d-lipid D2O pH7.85 PolyA
 #IvsQ_69810_69811,acmw_dlipid_hPolyA_2,d62_mc3:d45_chol,75:25,25% chol. d-lipid ACMW pH7.40 PolyA
 #
 #
@@ -72,37 +79,37 @@ fname,contrast,lipid,ratio,label
 #IvsQ_69834_69835,acmw_dlipid_hPolyA,d62_mc3:d45_chol,56.5:43.5,43.5% chol. d-lipid ACMW pH7.40 PolyA
 #
 #
-# misc 
+# misc
 #IvsQ_69840_69841, acmw
 #IvsQ_69843,
 #IvsQ_69845,
 #IvsQ_69847_69848,bare polyA
 #
 #
-# low Q acmw 
+# low Q acmw
 #IvsQ_69840_acmw,acmw_hlipid,mc3,100,ACMW
 #
 # low Q pH 3.0
-#IvsQ_69780_S09,acmw_dlipid_1,d62_mc3,100,0% chol. d-lipid ACMW pH3.00 
+#IvsQ_69780_S09,acmw_dlipid_1,d62_mc3,100,0% chol. d-lipid ACMW pH3.00
 #IvsQ_69782_S10,acmw_dlipid_hPolyA_1,d62_mc3,100,0% chol. d-lipid ACMW pH3.00 PolyA
-#IvsQ_69768_S03,acmw_dlipid,d62_mc3:d45_chol,75:25,25% chol. d-lipid ACMW pH3.00  
-#IvsQ_69770_S04,acmw_dlipid_hPolyA,d62_mc3:d45_chol,75:25,25% chol. d-lipid ACMW pH3.00 PolyA 
+#IvsQ_69768_S03,acmw_dlipid,d62_mc3:d45_chol,75:25,25% chol. d-lipid ACMW pH3.00
+#IvsQ_69770_S04,acmw_dlipid_hPolyA,d62_mc3:d45_chol,75:25,25% chol. d-lipid ACMW pH3.00 PolyA
 #IvsQ_69792_S15,acmw_dlipid_2,d62_mc3:d45_chol,56.5:43.5,43.5% chol. d-lipid ACMW pH3.00
 #IvsQ_69794_S16,acmw_dlipid_hPolyA2,d62_mc3:d45_chol,56.5:43.5,43.5% chol. d-lipid ACMW pH3.00 PolyA
 #
 # low Q pH 7.4
-#IvsQ_69820_S27,acmw_dlipid_3,d62_mc3,100,0% chol. d-lipid ACMW pH7.40 
+#IvsQ_69820_S27,acmw_dlipid_3,d62_mc3,100,0% chol. d-lipid ACMW pH7.40
 #IvsQ_69822_S28,acmw_dlipid_hPolyA_3,d62_mc3,100,0% chol. d-lipid ACMW pH7.40 PolyA
-#IvsQ_69808_S21,acmw_dlipid_4,d62_mc3:d45_chol,75:25,25% chol. d-lipid ACMW pH7.40   
-#IvsQ_69810_S22,acmw_dlipid_hPolyA_4,d62_mc3:d45_chol,75:25,25% chol. d-lipid ACMW pH7.40 PolyA 
-#IvsQ_69832_S33,acmw_dlipid_5,d62_mc3:d45_chol,56.5:43.5,43.5% chol. d-lipid ACMW pH7.40 
+#IvsQ_69808_S21,acmw_dlipid_4,d62_mc3:d45_chol,75:25,25% chol. d-lipid ACMW pH7.40
+#IvsQ_69810_S22,acmw_dlipid_hPolyA_4,d62_mc3:d45_chol,75:25,25% chol. d-lipid ACMW pH7.40 PolyA
+#IvsQ_69832_S33,acmw_dlipid_5,d62_mc3:d45_chol,56.5:43.5,43.5% chol. d-lipid ACMW pH7.40
 #IvsQ_69834_S34,acmw_dlipid_hPolyA_5,d62_mc3:d45_chol,56.5:43.5,43.5% chol. d-lipid ACMW pH7.40 PolyA
 #
 #
 #
 #
 # --------------------------------------------------------------------------- #
-# 9-13-1016 SW mc3: ILL injection study 
+# 9-13-1016 SW mc3: ILL injection study
 #
 # reference mc3 PBS:
 #hmc3-D2O,d2O_hlipid,mc3,100,0% chol. h-lipid D2O pD7.85
@@ -132,8 +139,8 @@ fname,contrast,lipid,ratio,label
 # --------------------------------------------------------------------------- #
 # Alice-March (2022)
 #
-#IvsQ_65083_65084_S01_pre,acmw_dlipid,d31-POPC:DOPE:SM:chol,40:20:6:34,S01 dEEM-dPOPC ACMW
-#IvsQ_65102+65103_65104_S01_post,acmw_dlip_2,d31-POPC:DOPE:SM:chol,40:20:6:34,S01 dEEM-dPOPC ACMW hLNPs
+#IvsQ_65083_65084_S01_pre,acmw_dlipid,d31_POPC:DOPE:SM:chol,40:20:6:34,S01 dEEM-dPOPC ACMW
+#IvsQ_65102+65103_65104_S01_post,acmw_dlip_2,d31_POPC:DOPE:SM:chol,40:20:6:34,S01 dEEM-dPOPC ACMW hLNPs
 #
 #IvsQ_65105_65106_S04_pre,acmw_dlipid_2,POPC:DOPE:SM:d45_chol,40:20:6:34,S04 dEEM-dChol ACMW
 #IvsQ_65124+65125_65126_S04_post,acmw_dlip_2,POPC:DOPE:SM:d45_chol,40:20:6:34,S04 dEEM-dChol ACMW hLNPs
@@ -167,7 +174,8 @@ fname,contrast,lipid,ratio,label
 #IvsQ_67196_67197_S03_pre,acmw_hlipid,POPC:DOPE:SM:chol,40:20:6:34,S03 hEEM ACMW pH 5.5
 #IvsQ_67199+67198_sliced_9457_10808_67200_S03_post,acmw_hlipid_2,POPC:DOPE:SM:chol,40:20:6:34,S03 hEEM ACMW pH 5.5 dlipid5-LNPs
 #
-#IvsQ_67205+67203_sliced_9456.16_10807_S04_post,acmw_hlipid_2,POPC:DOPE:SM:chol,40:20:6:34,S04 hEEM ACMW pH 5.5 dmc3-LNPs
+#########IvsQ_67205+67203_sliced_9456.16_10807_S04_post,acmw_hlipid_2,POPC:DOPE:SM:chol,40:20:6:34,S04 hEEM ACMW pH 5.5 dmc3-LNPs
+#67205_lowQ_S04_post,acmw_hlipid_2,POPC:DOPE:SM:chol,40:20:6:34,S04 hEEM ACMW pH 5.5 dmc3-LNPs
 #
 #IvsQ_65193_65194_S06_pre,d2o_hlipid,POPC:DOPE:SM:chol,40:20:6:34,S06 (March) hEEM D2O pH 5.5
 #IvsQ_67207+67206_sliced_9456.16_10807_67208_S05_post,d2o_hlipid_2,POPC:DOPE:SM:chol,40:20:6:34,S05 hEEM D2O pH 5.5 hLipid5-LNPs
@@ -178,8 +186,8 @@ fname,contrast,lipid,ratio,label
 #
 #IvsQ_67219+67218_sliced_2404.66_3606.99_67220_S08_post,acmw_hlipid_2,POPC:DOPE:SM:chol,40:20:6:34,S08 hEEM ACMW pH 5.5 dDSPC-hLipid5-LNPs
 #
-#IvsQ_67221_67222_S09_pre,acmw_dlipid_5,d31-POPC:DOPE:SM:chol,40:20:6:34,S09 dEEM-dPOPC ACMW pH 5.5
-#IvsQ_67226+67225_sliced_2404.66_3606.99_67227_S09_post,acmw_dlipid_2,d31-POPC:DOPE:SM:chol,40:20:6:34,S09 dEEM-dPOPC ACMW hLipid5-LNPs
+#IvsQ_67221_67222_S09_pre,acmw_dlipid_5,d31_POPC:DOPE:SM:chol,40:20:6:34,S09 dEEM-dPOPC ACMW pH 5.5
+#IvsQ_67226+67225_sliced_2404.66_3606.99_67227_S09_post,acmw_dlipid_2,d31_POPC:DOPE:SM:chol,40:20:6:34,S09 dEEM-dPOPC ACMW hLipid5-LNPs
 #
 #IvsQ_67231+67233+67230_sliced_2404.66_3606.99_67232_S10_post,acmw_hlipid_2,POPC:DOPE:SM:chol,40:20:6:34,S10 hEEM ACMW pH 6.5 dmc3-LNPs
 #
@@ -196,39 +204,40 @@ fname,contrast,lipid,ratio,label
 #can't find structure for hEEM d2o pD 6.9, March data has contrast at pD 5.9
 #IvsQ_67261+67260_sliced_2405.34_3608_67262_S15_post,d2o_hlipid,POPC:DOPE:SM:chol,40:20:6:34,S14 hEEM D2O pD 6.9 hmc3-LNPs
 #
-#IvsQ_67263_67264_S16_pre,acmw_dlipid_2,d31-POPC:DOPE:SM:chol,40:20:6:34,S16 dEEM-dPOPC ACMW pH 6.5
-#IvsQ_67268+67267_sliced_2404.66_3606.99_67269_S16_post,acmw_dlipid_2,d31-POPC:DOPE:SM:chol,40:20:6:34,S16 dEEM-dPOPC ACMW pH 6.5 hmc3-LNPs
+#IvsQ_67263_67264_S16_pre,acmw_dlipid_2,d31_POPC:DOPE:SM:chol,40:20:6:34,S16 dEEM-dPOPC ACMW pH 6.5
+#IvsQ_67268+67267_sliced_2404.66_3606.99_67269_S16_post,acmw_dlipid_2,d31_POPC:DOPE:SM:chol,40:20:6:34,S16 dEEM-dPOPC ACMW pH 6.5 hmc3-LNPs
 #
-#IvsQ_67270_67271_S17_bare,acmw_noMono,NA,0,S17 ACMW pH 6.5
+#IvsQ_67270_67271_S17_bare,acmw,POPC:DOPE:SM:chol,40:20:6:34,S17 ACMW pH 6.5
 #
 #IvsQ_67275+67274_sliced_2404.66_3606.99_67276_S18_post,acmw_hlipid_2,POPC:DOPE:SM:chol,40:20:6:34,S18 hEEM ACMW pH 6.5 dLipid5-LNPs
 #
 #IvsQ_67280+67279_sliced_2405.34_3608_67281_S19_post,acmw_hlipid_2,POPC:DOPE:SM:chol,40:20:6:34,S19 hEEM ACMW pH 6.5 hmc3-LNPs
 #
 #
+#
 # --------------------------------------------------------------------------- #
-# Alice-April (2023)         
+# Alice-April (2023)
 #
 # D2O
 #IvsQ_70822+70823_70824,d2o
 #
-# ACMW 
-#IvsQ_70829_70830,acmw,
+# ACMW - lipids are just there to not throw an error, ignored anyway in lowQ analysis
+#IvsQ_70829_70830,acmw,POPC:DOPE:SM:chol,40:20:6:34,ACMW pH 6.5
 #
-# ACMW hEMM P=15 before LNP addition pH 6.5 
-IvsQ_70831_70832,acmw,POPC:DOPE:SM:chol,40:20:6:34,hEEM ACMW pH 6.5
-# 
+# ACMW hEMM P=15 before LNP addition pH 6.5
+#IvsQ_70831_70832,acmw_hlipid,POPC:DOPE:SM:chol,40:20:6:34,hEEM ACMW pH 6.5
+#
 # ACMW hEMM 6.5 P=15 after 25m 6s injection of d-DSPC/Lipid V/LNPs post-kinetic
 #IvsQ_70839_70840,acmw_hlipid,POPC:DOPE:SM:chol,40:20:6:34,hEEM ACMW pH 6.5 d-DSPC h-Lipid5 LNPs
-# 
+#
 # ACMW hEMM 6.5 P=15 after injection of d-MC3/LNPs post-kinetic
 #IvsQ_70847_70848,acmw_hlipid,POPC:DOPE:SM:chol,40:20:6:34,hEEM ACMW pH 6.5 d-MC3 LNPs
 #
 # ACMW hEMM 6.5 P=15 after injection of h-Lipid V/LNPs post-kinetic
 #IvsQ_70855_70856,acmw_hlipid,POPC:DOPE:SM:chol,40:20:6:34,hEEM ACMW pH 6.5 h-Lipid5 LNPs
 #
-# D2O 6.9 P=15 before addition of h-LNP to h-EMMM 
-IvsQ_70857_70858,d2o_hlipid,POPC:DOPE:SM:chol,40:20:6:34,hEEM D2O pD 6.9
+# D2O 6.9 P=15 before addition of h-LNP to h-EMMM
+#IvsQ_70857_70858,d2o_hlipid,POPC:DOPE:SM:chol,40:20:6:34,hEEM D2O pD 6.9
 #
 # D2O 6.9 P=15 after injection of 24m 26s h-Lipid V/LNPs post-kinetic
 #IvsQ_70865+70866_70867,d2o_hlipid,POPC:DOPE:SM:chol,40:20:6:34,hEEM D2O pD 6.9 h-Lipid5 LNPs
@@ -250,6 +259,64 @@ IvsQ_70857_70858,d2o_hlipid,POPC:DOPE:SM:chol,40:20:6:34,hEEM D2O pD 6.9
 #
 # ACMW pH 6.5 d-chol-EEM P=15 25m 18s after injection of h-Lipid V/LNPs post-kinetic
 #IvsQ_70905_70906,acmw_dlipid,POPC:DOPE:SM:d45_chol,40:20:6:34,d-chol EEM ACMW pH 6.5 h-Lipid5 LNPs
+#
+#
+#
+#
+# --------------------------------------------------------------------------- #
+# Alice-Mar+Sep (2022) Low Q data 
+#
+#65083_S01_pre,acmw,POPC,1,na_label
+#65102_S01_post,acmw,POPC,1,na_label
+#65105_S04_pre,acmw,POPC,1,na_label
+#65124_S04_post,acmw,POPC,1,na_label
+#65145_S02_post,acmw,POPC,1,na_label
+#65164_S03_post,acmw,POPC,1,na_label
+#65171_S05_pre,acmw,POPC,1,na_label
+#65190_S05_post,acmw,POPC,1,na_label
+#67185_lowQ_S01_pre,acmw,POPC,1,na_label
+#67189_lowQ_S01_post,acmw,POPC,1,na_label
+#67191_lowQ_S02_pre,acmw,POPC,1,na_label
+#67194_lowQ_S02_post,acmw,POPC,1,na_label
+#67196_lowQ_S03_pre,acmw,POPC,1,na_label
+#67199_lowQ_S03_post,acmw,POPC,1,na_label
+#67205_lowQ_S04_post,acmw,POPC,1,na_label
+#67210_lowQ_S06_post,acmw,POPC,1,na_label
+#67214_lowQ_S07_post,acmw,POPC,1,na_label
+#67219_lowQ_S08_post,acmw,POPC,1,na_label
+#67221_lowQ_S09_pre,acmw,POPC,1,na_label
+#67226_lowQ_S09_post,acmw,POPC,1,na_label
+#67231_lowQ_S10_post,acmw,POPC,1,na_label
+#67237_lowQ_S11_post,acmw,POPC,1,na_label
+#67239_lowQ_S12_pre,acmw,POPC,1,na_label
+#67244_lowQ_S12_post,acmw,POPC,1,na_label
+#67246_lowQ_S13_pre,acmw,POPC,1,na_label
+#67251_lowQ_S13_post,acmw,POPC,1,na_label
+#67256_lowQ_S14_post,acmw,POPC,1,na_label
+#67263_lowQ_S16_pre,acmw,POPC,1,na_label
+#67268_lowQ_S16_post,acmw,POPC,1,na_label
+#67270_ACMW_Sep,acmw,POPC,1,na_label
+#67275_lowQ_S18_post,acmw,POPC,1,na_label
+#67280_lowQ_S19_post,acmw,POPC,1,na_label
+#March_ACMW_pH5.5,acmw,POPC,1,na_label
+#
+#
+#
+#
+# --------------------------------------------------------------------------- #
+# Alice-Apr (2023) Low Q data 
+#
+#IvsQ_70829,acmw,POPC,1,na_label
+#IvsQ_70831,acmw,POPC,1,na_label
+#IvsQ_70839,acmw,POPC,1,na_label
+#IvsQ_70847,acmw,POPC,1,na_label
+#IvsQ_70855,acmw,POPC,1,na_label
+#IvsQ_70874,acmw,POPC,1,na_label
+#IvsQ_70882,acmw,POPC,1,na_label
+#IvsQ_70888,acmw,POPC,1,na_label
+#IvsQ_70895,acmw,POPC,1,na_label
+#IvsQ_70897,acmw,POPC,1,na_label
+#IvsQ_70905,acmw,POPC,1,na_label
 #
 #
 #
