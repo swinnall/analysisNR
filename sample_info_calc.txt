@@ -1,0 +1,30 @@
+title=calc_sld_par
+fname,contrast,lipid,ratio,label
+#
+# EXAMPLE
+# file_name,subphase_lipid,lipid1:lipid2,ratio1:ratio2,label_description
+#
+# --------------------------------------------------------------------------- #
+# lipid calculations test
+#IvsQ_69776_69777,d2o_hlipid_hpolya,popc:chol,7:3,Yixuan plasma memb
+#IvsQ_69776_69777,d2o_hlipid_hpolya,POPC:DOPE:SM:chol,40:20:6:34,h-EEM
+#IvsQ_69776_69777,d2o_hlipid_hpolya,d31_POPC:DOPE:SM:chol,40:20:6:34,d31-POPC-EEM
+#IvsQ_69776_69777,d2o_hlipid_hpolya,POPC:DOPE:SM:d45_chol,40:20:6:34,d45-Chol-EEM
+#
+#
+#IvsQ_69776_69777,d2o_hlipid_hpolya,d31_popc,1,
+#IvsQ_69776_69777,d2o_hlipid_hpolya,popc,1,
+#IvsQ_69776_69777,d2o_hlipid_hpolya,dope,1,
+#IvsQ_69776_69777,d2o_hlipid_hpolya,sm,1,
+
+#IvsQ_69770_69771,acmw_dlipid_hPolyA,mc3,1,
+#IvsQ_69770_69771,acmw_dlipid_hPolyA,d62_mc3,1,
+#IvsQ_69770_69771,acmw_dlipid_hPolyA,lipid_5,1,
+#IvsQ_69770_69771,acmw_dlipid_hPolyA,d19_lipid_5,1,
+#IvsQ_69776_69777,d2o_hlipid_hpolya,chol,1,
+#IvsQ_69776_69777,d2o_hlipid_hpolya,d45_chol,1,
+#IvsQ_69770_69771,acmw_dlipid_hPolyA,dspc,1,
+IvsQ_69770_69771,acmw_dlipid_hPolyA,d70_dspc,1,
+#
+#
+#

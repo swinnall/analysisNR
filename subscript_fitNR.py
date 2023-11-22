@@ -4,6 +4,7 @@ from refnx.reflect import SLD, ReflectModel
 from refnx.analysis import CurveFitter, GlobalObjective
 from scipy.optimize import NonlinearConstraint
 import matplotlib.pyplot as plt
+import matplotlib as mpl
 from scipy import integrate
 import numpy as np
 import functools
@@ -44,16 +45,18 @@ class Model:
         self.air = SLD(0.0, name='air')
 
         # define thicknesses
-        self.thickness_tails = Parameter(config.d1_0, bounds=(config.d1_lb,config.d1_ub), vary=config.d1_vary, name='Tails Thick.')
-        self.thickness_heads = Parameter(config.d2_0, bounds=(config.d2_lb,config.d2_ub), vary=config.d2_vary, name='Heads Thick.')
+        self.thickness_tails = Parameter(config.d1_0, bounds=(config.d1_lb,config.d1_ub), vary=config.d1_vary, name='$d_1 (\AA)$')
+        self.thickness_heads = Parameter(config.d2_0, bounds=(config.d2_lb,config.d2_ub), vary=config.d2_vary, name='$d_2 (\AA)$')
         self.thickness_layer_3 = Parameter(config.d3_0, bounds=(config.d3_lb,config.d3_ub), vary=config.d3_vary, name='Layer 3 Thick.')
         self.thickness_layer_4 = Parameter(config.d4_0, bounds=(config.d4_lb,config.d4_ub), vary=config.d4_vary, name='Layer 4 Thick.')
         self.thickness_layer_5 = Parameter(config.d5_0, bounds=(config.d5_lb,config.d5_ub), vary=config.d5_vary, name='Layer 5 Thick.')
-       
-        # define linked thickness 
-        if config.link_drug_thick == True: 
+        self.thickness_layer_6 = Parameter(config.d6_0, bounds=(config.d6_lb,config.d6_ub), vary=config.d6_vary, name='Layer 6 Thick.')
+        self.thickness_layer_7 = Parameter(config.d7_0, bounds=(config.d7_lb,config.d7_ub), vary=config.d7_vary, name='Layer 7 Thick.')
+
+        # define linked thickness
+        if config.link_drug_thick == True:
             self.linked_drug_thick = Parameter(config.d3_link_0, bounds=(config.d3_link_lb,config.d3_link_ub), vary=config.d3_link_vary, name='Layer 3 Linked Thick.')
-       
+
         # define tail solvent (always 0, no solvent in tails)
         self.tail_solvent = Parameter(0.0, name='Tail Solv.')
 
@@ -67,6 +70,11 @@ class Model:
         if config.with_drug_layer5 == True:
             self.layer5_solvent = Parameter(config.solv5_0, bounds=(config.solv5_lb,config.solv5_ub), vary=config.solv5_vary, name='Layer 5 Solv.')
 
+        if config.with_drug_layer6 == True:
+            self.layer6_solvent = Parameter(config.solv6_0, bounds=(config.solv6_lb,config.solv6_ub), vary=config.solv6_vary, name='Layer 6 Solv.')
+
+        if config.with_drug_layer7 == True:
+            self.layer7_solvent = Parameter(config.solv7_0, bounds=(config.solv7_lb,config.solv7_ub), vary=config.solv7_vary, name='Layer 7 Solv.')
 
         # SLD constant (based on reasonable guess) and solvent fixed at 0
         if config.surface_excess_mode == True:
@@ -83,7 +91,7 @@ class Model:
 
 
 
-    def load_contrast(self, file, contrast, lipid, ratio):
+    def load_contrast(self, file, contrast, lipid, ratio, title, label, colour):
 
         # define file / sample information parameters
         self.file = file
@@ -92,6 +100,13 @@ class Model:
         # receiving a specific lipid and ratio object from main() via lipids.get(i) for e.g.
         self.lipid = lipid
         self.ratio = ratio
+
+        # define the title and label of the figure and experimental data for saving SLD plots
+        self.title = title
+        self.label = label
+
+        # define the colour for each model
+        self.colour = colour
 
         # extract system information from contrast
         self.subphase = self.contrast[0]
@@ -123,13 +138,19 @@ class Model:
 
             # define boolean for whether parameter is fixed or varying
             subphase_vary = True if config.d2o_vary == True else False
-        
+
         else:
             print(f'Fatal Error: subphase input not acmw or d2o\nsubphase = {self.subphase}')
             sys.exit()
 
+
+        if self.subphase == 'D2O': math_subphase = 'D_2O'
+        if self.subphase == 'ACMW': math_subphase = self.subphase
+
+        str_ = r'$\rho_{'+ math_subphase +'} \ (10^{-6} \AA^2)$'
+
         # define parameter
-        self.rho_subphase = Parameter(subphase_init, bounds=(subphase_lb,subphase_ub), vary=subphase_vary, name=self.subphase+' SLD')
+        self.rho_subphase = Parameter(subphase_init, bounds=(subphase_lb,subphase_ub), vary=subphase_vary, name=str_)
 
 
         # define SLD slab
@@ -202,8 +223,8 @@ class Model:
 
         # set as parameter for later constraint
         self.vf_drug_layer3 = Parameter(self.layer3_vf_drug)
-        
-    
+
+
 
 
 
@@ -238,11 +259,11 @@ class Model:
     def make_component_slabs(self):
 
         # create SLD tail object (layer 1)
-        self.tails = SLD(self.rho_tails, name='tail')
+        self.tails = SLD(self.rho_tails, name='tails')
 
         # create tails slab
         self.tails_layer = self.tails(self.thickness_tails,self.roughness,self.tail_solvent)
-        
+
 
         # create SLD head objects (layer 2)
         if config.with_drug_layer2 == True:
@@ -313,6 +334,42 @@ class Model:
             self.fifth_layer = self.layer_5(self.linked_drug_thick,self.roughness,self.layer5_solvent)
 
 
+        # create a fourth drug layer (layer 6)
+        if config.with_drug_layer6 == True and config.link_drug_thick == False:
+
+            # create SLD object
+            self.layer_6 = SLD(self.rho_drug, name='SLD_drug')
+
+            # create drug slab
+            self.sixth_layer = self.layer_6(self.thickness_layer_6,self.roughness,self.layer6_solvent)
+
+        elif config.with_drug_layer6 == True and config.link_drug_thick == True:
+
+            # create SLD object
+            self.layer_6 = SLD(self.rho_drug, name='SLD_drug')
+
+            # create drug slab
+            self.sixth_layer = self.layer_6(self.linked_drug_thick,self.roughness,self.layer6_solvent)
+
+
+        # create a fifth drug layer (layer 7)
+        if config.with_drug_layer7 == True and config.link_drug_thick == False:
+
+            # create SLD object
+            self.layer_7 = SLD(self.rho_drug, name='SLD_drug')
+
+            # create drug slab
+            self.seventh_layer = self.layer_7(self.thickness_layer_7,self.roughness,self.layer7_solvent)
+
+        elif config.with_drug_layer7 == True and config.link_drug_thick == True:
+
+            # create SLD object
+            self.layer_7 = SLD(self.rho_drug, name='SLD_drug')
+
+            # create drug slab
+            self.seventh_layer = self.layer_7(self.linked_drug_thick,self.roughness,self.layer7_solvent)
+
+
 
         # create single 'slab' layer
         if config.surface_excess_mode == True:
@@ -341,17 +398,24 @@ class Model:
 
 
         # build structure
-        if config.with_drug_layer3 == False and config.with_drug_layer4 == False and config.with_drug_layer5 == False and config.surface_excess_mode == False:
+        if config.with_drug_layer3 == False and config.with_drug_layer4 == False and config.with_drug_layer5 == False and config.with_drug_layer6 == False and config.with_drug_layer7 == False and config.surface_excess_mode == False:
             structure = self.air | self.tails_layer | self.heads_layer | self.subphase_layer
-        
-        elif config.with_drug_layer3 == True and config.with_drug_layer4 == False and config.with_drug_layer5 == False and config.surface_excess_mode == False:
+
+        elif config.with_drug_layer3 == True and config.with_drug_layer4 == False and config.with_drug_layer5 == False and config.with_drug_layer6 == False and config.with_drug_layer7 == False and config.surface_excess_mode == False:
             structure = self.air | self.tails_layer | self.heads_layer | self.third_layer | self.subphase_layer
 
-        elif config.with_drug_layer3 == True and config.with_drug_layer4 == True and config.with_drug_layer5 == False and config.surface_excess_mode == False:
+        elif config.with_drug_layer3 == True and config.with_drug_layer4 == True and config.with_drug_layer5 == False and config.with_drug_layer6 == False and config.with_drug_layer7 == False and config.surface_excess_mode == False:
             structure = self.air | self.tails_layer | self.heads_layer | self.third_layer | self.fourth_layer | self.subphase_layer
 
-        elif config.with_drug_layer3 == True and config.with_drug_layer4 == True and config.with_drug_layer5 == True and config.surface_excess_mode == False:
+        elif config.with_drug_layer3 == True and config.with_drug_layer4 == True and config.with_drug_layer5 == True and config.with_drug_layer6 == False and config.with_drug_layer7 == False and config.surface_excess_mode == False:
             structure = self.air | self.tails_layer | self.heads_layer | self.third_layer | self.fourth_layer | self.fifth_layer | self.subphase_layer
+
+        elif config.with_drug_layer3 == True and config.with_drug_layer4 == True and config.with_drug_layer5 == True and config.with_drug_layer6 == True and config.with_drug_layer7 == False and config.surface_excess_mode == False:
+            structure = self.air | self.tails_layer | self.heads_layer | self.third_layer | self.fourth_layer | self.fifth_layer | self.sixth_layer | self.subphase_layer
+
+        elif config.with_drug_layer3 == True and config.with_drug_layer4 == True and config.with_drug_layer5 == True and config.with_drug_layer6 == True and config.with_drug_layer7 == True and config.surface_excess_mode == False:
+            structure = self.air | self.tails_layer | self.heads_layer | self.third_layer | self.fourth_layer | self.fifth_layer | self.sixth_layer | self.seventh_layer | self.subphase_layer
+
 
         elif config.surface_excess_mode == True:
             structure = self.air | self.slab_layer | self.subphase_layer
@@ -361,11 +425,6 @@ class Model:
             sys.exit()
 
 
-        # plot sld
-        if config.plotSLD == True:
-            plt.plot(*structure.sld_profile(),lw=3)
-            plt.xlabel(r'$z \rm{[\mathring{A}]}$')
-            plt.ylabel(r'$SLD [10^{-6} \rm{\mathring{A}}^{-2}]$')
 
 
         # store structure data for accessing SLD
@@ -432,10 +491,10 @@ def calcParNum(contrast_list):
         if subphase == 'D2O' and config.d2o_vary == True:
             nPars += 1
 
-    # one parameter per thickness layer 
+    # one parameter per thickness layer
     if config.d1_vary == True:
         nPars += 1
-        
+
     if config.d2_vary == True:
         nPars += 1
 
@@ -456,8 +515,8 @@ def calcParNum(contrast_list):
 
         if config.solv4_vary == True:
             nPars += 1
-            
-            
+
+
     if config.with_drug_layer5 == True:
 
         if config.d5_vary == True and config.link_drug_thick == False:
@@ -467,10 +526,10 @@ def calcParNum(contrast_list):
             nPars += 1
 
 
-    if config.link_drug_thick == True: 
+    if config.link_drug_thick == True:
         nPars += 1
-       
-        
+
+
     # adds parameter for second monolayer SLD
     if config.SLD_exchange_mode == True:
         nPars += 1
@@ -567,14 +626,24 @@ def fitModel(title, sampleInfo):
     # initialise class
     M = Model()
 
+    # initialise count variable for number of models to cofit
+    count_model = 0
+
     # iterate across each contrast
-    for path, contrast, lipid, ratio in zip(sampleInfo['filePath'],\
-                                            sampleInfo['contrast'],\
-                                            sampleInfo['lipid'],\
-                                            sampleInfo['ratio']):
+    for path, contrast, lipid, ratio, label in zip(sampleInfo['filePath'],\
+                                                   sampleInfo['contrast'],\
+                                                   sampleInfo['lipid'],\
+                                                   sampleInfo['ratio'],\
+                                                   sampleInfo['label']):
+
+        # define the colour for SLD plots
+        colour = config.col_light[count_model]
+
+        # update model count
+        count_model +=1
 
         # load the information into the class
-        M.load_contrast(path, contrast, lipid, ratio)
+        M.load_contrast(path, contrast, lipid, ratio, title, label, colour)
 
         # generate the subphase slab
         M.make_backing_slab()
@@ -601,10 +670,10 @@ def fitModel(title, sampleInfo):
     obj_list = M.obj_list
 
 
-    # print line break for debugging clarity 
+    # print line break for debugging clarity
     if config.verbose == True:
         print('\n-------------------------------------------')
-        
+
 
     ## Fitting procedure
 
@@ -616,15 +685,14 @@ def fitModel(title, sampleInfo):
 
     #constrain t_thick > h_thick
     class DEC(object):
-        def __init__(self, pars, objective):
-            # we'll store the parameters and objective in this object
-            # this will be necessary for pickling in the future
+        def __init__(self, pars, global_objective):
+            # store the parameters and objective in this object
+            # necessary for pickling in the future
             self.pars = pars
-            self.objective = objective
+            self.objective = global_objective
 
         def __call__(self, x):
-            # we need to update the varying parameters in the
-            # objective first
+            # update the varying parameters in the objective first
             self.objective.setp(x)
             return float(self.pars[0] - self.pars[1])
 
@@ -633,8 +701,11 @@ def fitModel(title, sampleInfo):
 
     thickness_constraint = NonlinearConstraint(dec, 0, np.inf)
 
-
     # do fit
+    # result, covar : :class:`scipy.optimize.OptimizeResult`, np.ndarray
+    # `result.x` contains the best fit parameters
+    # `result.covar` is the covariance matrix for the fit.
+    # `result.stderr` is the uncertainties on each of the fit parameters.
     fitter.fit(config.algorithm, constraints=(thickness_constraint));
 
     # calculate reduced chi square value
@@ -642,21 +713,48 @@ def fitModel(title, sampleInfo):
 
 
     ## Markov Chain Monte Carlo
-
+    res = None
     if config.doMCMC == True:
 
         # MCMC - burn first 400 as initial chain might not be representative of equilibrated system
-        fitter.sample(steps=config.MCMC_initSteps, random_state=1, pool=-1)
+        fitter.sample(steps=config.MCMC_initSteps, random_state=1, pool=0) # pool = -1 for all cores
         fitter.sampler.reset()
 
         # MCMC - production run - save 1 in 100 samples to remove autocorrelation, save 15 stes giving 15*200 samples (200 walkers by default)
-        res = fitter.sample(config.MCMC_nSteps, nthin=config.MCMC_nThin, random_state=1, pool=-1)
+        res = fitter.sample(config.MCMC_nSteps, nthin=config.MCMC_nThin, random_state=1, pool=0)
 
         # plot corner plot to show covariance between parameters
-        global_objective.corner()
-        plt.savefig('../output/corner-' +title+'.png',
-            format='png',
-            dpi=400,
+        fig = global_objective.corner(show_titles=True)
+
+        # update axis properties
+        for ax in fig.get_axes():
+
+            # ax.xaxis.label.set_size(14)
+            # ax.yaxis.label.set_size(14)
+
+            # from matplotlib.ticker import FormatStrFormatter
+            # ax.xaxis.set_major_formatter(FormatStrFormatter('%.2f'))
+            # ax.yaxis.set_major_formatter(FormatStrFormatter('%.2f'))
+
+            # ax.xaxis.label.set_visible(False)
+            # ax.yaxis.label.set_visible(False)
+
+
+            # ax.xaxis.label.set_weight("bold")
+            # ax.yaxis.label.set_weight("bold")
+
+            ax.tick_params(axis='both',
+                           direction='in',
+                           # labelsize=12,
+                           pad=2,
+                           bottom=True,
+                           top=True,
+                           left=True,
+                           right=True,
+                           )
+
+        plt.savefig('../output/corner-' +title+'.png', # png / svg
+            dpi=300,
             bbox_inches='tight')
 
 
@@ -674,6 +772,47 @@ def fitModel(title, sampleInfo):
 
     for idx, model_data in enumerate(M.model_list):
 
+        struct = model_data.structure
+
+        label = sampleInfo['label'][idx]
+
+        col = config.col_light[idx]
+
+        # plot sld
+        if config.plotSLD == True:
+
+            # define rc parameters
+            mpl.rcParams['axes.linewidth'] = 2
+            mpl.rcParams['axes.labelsize'] = 24
+            mpl.rcParams['axes.labelsize'] = 24
+            mpl.rcParams['xtick.direction'] = 'in'
+            mpl.rcParams['ytick.direction'] = 'in'
+            mpl.rcParams['xtick.major.width'] = 2
+            mpl.rcParams['ytick.major.width'] = 2
+            mpl.rcParams['xtick.top'] = True
+            mpl.rcParams['ytick.right'] = True
+            mpl.rcParams['xtick.labelsize'] = 12
+            mpl.rcParams['ytick.labelsize'] = 12
+            mpl.rcParams['text.usetex'] = True
+            mpl.rcParams['font.family'] = 'serif'
+            mpl.rcParams['legend.loc'] = 'best'
+
+            plt.axhline(y=0,color='black',linestyle='-',zorder=0)
+
+            plt.plot(*struct.sld_profile(),lw=3,color=col,label=label)
+            plt.xlabel(r'$z$ $\rm{(\mathring{A})}$')
+            plt.ylabel(r'$\rho$ $(10^{-6} \rm{\mathring{A}}^{-2})$')
+            plt.legend(frameon=False, fontsize=12, ncol=1)
+
+            plt.xlim(-15,100)
+            plt.ylim(-0.5,6.5) # 0.25, 2 / -0.5, 6.5
+
+            plt.savefig('../output/sld-'+title+'.png',
+                dpi=300,
+                bbox_inches='tight')
+
+
+
         # get min and max q values
         qmin, qmax = sampleInfo['qmin'][idx], sampleInfo['qmax'][idx]
 
@@ -684,12 +823,52 @@ def fitModel(title, sampleInfo):
         modelQ_list.append(q)
         modelNR_list.append(pd.Series(model_data(q)))
 
+
+
+    # generate h-lipid ACMW contrast
+    if config.gen_hlip_acmw_model == True:
+
+        # define model slabs
+        sld_air = SLD(0);
+        sld_tails = SLD(-0.07299); slab_tails = sld_tails(config.d1_0,config.rough_0,0.0) # h: -0.07299 d: 6.19
+        sld_heads = SLD(0.726); slab_heads = sld_heads(config.d2_0,config.rough_0,0.42)
+        sld_drug1 = SLD(config.rho_h_drug); slab_drug1 = sld_drug1(config.d3_0,config.rough_0,0.44)
+        sld_drug2 = SLD(config.rho_h_drug); slab_drug2 = sld_drug2(config.d4_0,config.rough_0,0.77)
+        sld_drug3 = SLD(config.rho_h_drug); slab_drug3 = sld_drug3(config.d5_0,config.rough_0,0.91)
+        sld_sub = SLD(0); slab_sub = sld_sub(0,config.rough_0)
+
+        # build structure
+        structure = sld_air | slab_tails | slab_heads | slab_drug1 | slab_drug2 | slab_drug3 | slab_sub
+
+        # plot sld
+        plt.plot(*structure.sld_profile(),lw=3)
+        plt.xlabel(r'$z \rm{[\mathring{A}]}$')
+        plt.ylabel(r'$SLD [10^{-6} \rm{\mathring{A}}^{-2}]$')
+
+
+        # generate model
+        model = ReflectModel(structure, dq=config.dq, dq_type=config.dq_type)
+
+        # set background of model
+        model.bkg.setp(config.bkg_acmw_0,vary=config.bkg_acmw_vary,bounds=(config.bkg_acmw_lb, config.bkg_acmw_ub))
+
+        # store another q value
+        modelQ_list.append(q)
+        modelNR_list.append(pd.Series(model_data(q)))
+
+        # this will exceed index of dataframe, therefore get row number and populate
+        # current df with None on the new row
+        max_df_rows = len(sampleInfo)
+        idx = max_df_rows + 1
+        sampleInfo.loc[idx] = [None for i in range(len(sampleInfo.loc[0]))]
+
+
     # load into dataframe
     sampleInfo['Q_model'] = modelQ_list
     sampleInfo['R_model'] = modelNR_list
 
-
-
+    # print(sampleInfo['R_model'])
+    # sys.exit()
 
     ## Calculate APM
 
@@ -707,21 +886,21 @@ def fitModel(title, sampleInfo):
 
 
     ## Calculate charge density
-    
-    # taking the last state loaded into M and assuming all contrasts are the same 
-    
+
+    # taking the last state loaded into M and assuming all contrasts are the same
+
     # assuming +1e charge per headgroup and APM in angstroms^2
     # if at pH 7.4 then charge number by an additional 0.01 to account for 10 % charge
-    
+
     # if only one component then force frac=1 to prevent typos in input ratio
-    if type(M.ratio) == int: 
-        mc3_frac = 1 
-        
+    if type(M.ratio) == int:
+        mc3_frac = 1
+
     # if more than one component assume mc3 is written first and convert to frac
     else:
         ratio_list = M.ratio.split(':')
         mc3_frac = float(ratio_list[0]) / 100
-    
+
     sigma = mc3_frac * (1.609 * 10) / APM
 
 
@@ -785,7 +964,7 @@ def fitModel(title, sampleInfo):
     ## Write global objective output to txt file
 
     if config.writeGlobalObj == True:
-        writeParams('../output/parameters-'+title+'.txt', reduced_chisq, global_objective)
+        writeParams('../output/par-'+title+'.txt', reduced_chisq, global_objective)
 
 
-    return sampleInfo, global_objective, reduced_chisq, APM, sigma
+    return sampleInfo, global_objective, reduced_chisq, APM, sigma, res

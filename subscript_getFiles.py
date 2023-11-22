@@ -22,12 +22,36 @@ def getFile(path,nSkip,delim,header,names):
         pandas dataframe
 
     """
+    
 
-    return pd.read_csv(path, skiprows=nSkip, sep=delim, header=header, names=names, \
-                       comment='#',\
-                       na_values =' ',\
-                       skip_blank_lines=True,\
-                       encoding = "utf-8")
+    df = pd.read_csv(path, 
+                skiprows=nSkip, 
+                #sep=delim, # assuming it's automatically delimted now 
+                header=header, 
+                names=names,
+                comment='#',
+                na_values =' ',
+                skip_blank_lines=True,
+                encoding = "utf-8",
+                )
+    
+    # need to replace the dataframe with the whitespace delimeted version
+    # as ILL .mft files are not regularly delimted 
+    if names != None and 'Q_exp' in names and df.isnull().values.any() == True:
+
+        df = pd.read_csv(path, 
+                    skiprows=nSkip, 
+                    delim_whitespace=True,
+                    header=header, 
+                    names=names,
+                    comment='#',
+                    na_values =' ',
+                    skip_blank_lines=True,
+                    encoding = "utf-8", 
+                    )
+
+    return df
+    
 
 
 def getSampleInfo():
@@ -50,17 +74,17 @@ def getSampleInfo():
     """
 
     # get the title of sample info file
-    with open('sample_info.txt', newline='') as f:
+    with open(config.sample_info_fname, newline='') as f:
         title = list(csv.reader(f))[0][0].split('=')[1]
 
 
     # get the sample info file
-    sampleInfo = getFile(path='sample_info.txt', nSkip=1, delim=',',header=0,names=None)
+    sampleInfo = getFile(path=config.sample_info_fname, nSkip=1, delim=',',header=0,names=None)
 
 
     # check that a file has been inputted
     if len(sampleInfo) == 0:
-        print('\nFatal Error: No input files in sample_info.txt')
+        print(f'\nFatal Error: No input files in {config.sample_info_fname}')
         print('Possible Reason: All rows are commented out.')
         sys.exit()
 
@@ -79,7 +103,7 @@ def getSampleInfo():
             for name in files:
 
                 # if a match exists then store
-                if name in [fname+".txt",fname+".dat"]:
+                if name in [fname+".txt",fname+".dat",fname+".mft"]:
                     file_path_str = os.path.join(root,name)
                     file_path_list.append(file_path_str)
 
@@ -141,12 +165,17 @@ def getExperimentalData(sampleInfo):
             delim_ = ' '
             names_ = ['Q_exp','R_exp','R_err_exp']
 
+        elif suffix == 'mft':
+            delim_ = ' '
+            names_ = ['Q_exp','R_exp','R_err_exp', 'Q_exp_err']
+
 
         # get the experimental data as a data frame
         experiment_df = getFile(path=path_, nSkip=1, delim=delim_, header=None,\
                                 names=names_)
 
         #print(experiment_df); sys.exit()
+        
         # truncate experiment_df to only include low Q data
         if config.surface_excess_mode == True:
             experiment_df = experiment_df[experiment_df['Q_exp'] < 0.07]

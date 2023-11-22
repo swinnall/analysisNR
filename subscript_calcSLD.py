@@ -65,6 +65,13 @@ class Monolayer:
     def calcSL(self):
 
         for i, lipid in enumerate(self.lipidNames):
+            
+            # check lipid is in database 
+            if self.lipidDatabase.get(lipid) == None:
+                print('\nFatal Error: Lipid not found. Check spelling.')
+                print('Example: use of underscore, e.g. lipid_5 not lipid-5')
+                sys.exit()
+            
             self.lipidSL[lipid] = {'head': 0, 'tails': 0}
 
             for j, struct in enumerate(['head','tails']):
@@ -91,7 +98,7 @@ class Monolayer:
 
     
                     if atom_str == 'D' and self.lipidDatabase.get(lipid).get('dfrac') != None:
-                        
+
                         # get deuteration coeficient from config database 
                         dfrac = self.lipidDatabase.get(lipid).get('dfrac')
                         
@@ -105,7 +112,7 @@ class Monolayer:
                         self.lipidSL[lipid][struct] += hfrac * self.atomSL.get('H') * atom_num
                         
                         if config.verbose == True:
-                            print(f'\nAccounted for {dfrac*100} %% deuteration')
+                            print(f'\nAccounted for {dfrac*100} %% deuteration for {lipid}')
                             print(f'number of D = {dfrac:.3} * {atom_num} = {dfrac*atom_num:.3}')
                             print(f'number of H added = {hfrac:.3} * {atom_num} = {hfrac*atom_num:.3} ')
                     

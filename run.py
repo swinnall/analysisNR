@@ -39,9 +39,17 @@ sampleInfo = getExperimentalData(sampleInfo)
 
 # ---------------------------------------------------------------------------#
 # GENERATE MODEL DATA
+if config.plotOnlyExp == False:
+    sampleInfo, global_objective, reduced_chisq, APM, sigma, res = fitModel(title,sampleInfo)
 
-# generate model data
-sampleInfo, global_objective, reduced_chisq, APM, sigma = fitModel(title,sampleInfo)
+
+
+# ---------------------------------------------------------------------------#
+# SIMULATE MISSING CONTRASTS
+
+
+
+
 
 
 # ---------------------------------------------------------------------------#
@@ -59,40 +67,58 @@ else:
     fig.plotStruct(title,sampleInfo,row=1,col=1,showlegend=False)
 
 
-    print('\n\n--------------------------------------------------------------------')
+    if config.plotOnlyExp == False:
 
-    # print reminders for when merging third and headgroup layers
-    if config.with_drug_layer2 == True and config.d3_vary == False:
-        print('\nReminder: user has fixed d3 while merging with headgroup layer.')
-        print('This introduces the constraint: d3 = config.d3_0 - d2')
+        print('\n\n--------------------------------------------------------------------')
 
-    if config.with_drug_layer2 == True and config.d3_vary == True:
-        print('\nReminder: user has fitted d3 while merging with headgroup layer.')
-        print('This means the total drug thickness = d3 + d2')
+        # print reminders for when merging third and headgroup layers
+        if config.with_drug_layer2 == True and config.d3_vary == False:
+            print('\nReminder: user has fixed d3 while merging with headgroup layer.')
+            print('This introduces the constraint: d3 = config.d3_0 - d2')
 
-
-
-    print('\nVaried Parameters:')
-    for par_vary in global_objective.parameters.varying_parameters():
-
-        if par_vary.name == 'bkg':
-            print(par_vary.name, "{:.2e}".format(par_vary.value), par_vary.bounds)
-        else:
-            print(par_vary.name, "{:.2f}".format(par_vary.value), par_vary.bounds)
+        if config.with_drug_layer2 == True and config.d3_vary == True:
+            print('\nReminder: user has fitted d3 while merging with headgroup layer.')
+            print('This means the total drug thickness = d3 + d2')
 
 
-    print('\nConstrained Parameters:')
-    for par_constrain in global_objective.parameters.constrained_parameters():
-        print(par_constrain.name, "{:.2f}".format(par_constrain.value))
+
+        print('\nVaried Parameters:')
+        for par_vary in global_objective.parameters.varying_parameters():
+
+            if par_vary.name == 'bkg':
+                print(par_vary.name,
+                      "{:.2e}".format(par_vary.value),
+                      par_vary.bounds)
+            else:
+                print(par_vary.name,
+                      "{:.2f}".format(par_vary.value),
+                      par_vary.bounds)
 
 
-    # print calculated quantities
-    print('\nReduced chisqr = %.2f' %reduced_chisq)
-    print(f'\nArea per molecule = {APM:.2f} A^2')
-    print(f'\nCharge density = {sigma:.2f} C/m^2\n NB: Multiply by % charged for correct value')
+        # accessing error bars
+        # stderr is the half width of the quantiles in the histogram [15.87, 84.13]
+        # similar to standard deviation
+        print('\nMCMC Errors:')
+        if isinstance(res,list):
+            for par in res:
+                print(f'{par.name}: {par.median:.4f} +/- {par.stderr:.4f}')
 
 
+
+        print('\nConstrained Parameters:')
+        for par_constrain in global_objective.parameters.constrained_parameters():
+            print(par_constrain.name, "{:.2f}".format(par_constrain.value))
+
+
+
+        # print calculated quantities
+        print('\nReduced chisqr = %.2f' %reduced_chisq)
+        print(f'\nArea per molecule = {APM:.2f} A^2')
+
+
+
+# fig.reorder()
 
 fig.save_figure(title)
 
-fig.show_figure()
+#fig.show_figure()

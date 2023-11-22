@@ -1,0 +1,182 @@
+title=apr23_ph6_fin
+fname,contrast,lipid,ratio,label
+#
+# EXAMPLE
+# file_name,subphase_lipid,lipid1:lipid2,ratio1:ratio2,label_description
+#
+# --------------------------------------------------------------------------- #
+# ALL LOW Q DATA
+#
+#65083_s01_pre,acmw,na,1,label
+#65102_s01_post,acmw,na,1,label
+#65105_s04_pre,acmw,na,1,label
+#65124_s04_post,acmw,na,1,label
+#65145_s02_post,acmw,na,1,label
+#65164_s03_post,acmw,na,1,label
+#65168_acmw_mar22,acmw,na,1,label
+#65171_s05_pre,acmw,na,1,label
+#65190_s05_post,acmw,na,1,label
+#
+#67185_s01_pre,acmw,na,1,label
+#67189_s01_post,acmw,na,1,label
+#67191_s02_pre,acmw,na,1,label
+#67194_s02_post,acmw,na,1,label
+#67196_s03_pre,acmw,na,1,label
+#67199_s03_post,acmw,na,1,label
+#67205_s04_post,acmw,na,1,67205
+#67210_s06_post,acmw,na,1,67210
+#67214_s07_post,acmw,na,1,label
+#67219_s08_post,acmw,na,1,label
+#67221_s09_pre,acmw,na,1,label
+#67226_s09_post,acmw,na,1,label
+#67231_s10_post,acmw,na,1,67231
+#67237_s11_post,acmw,na,1,label
+#67239_s12_pre,acmw,na,1,label
+#67244_s12_post,acmw,na,1,label
+#67246_s13_pre,acmw,na,1,label
+#67251_s13_post,acmw,na,1,label
+#67256_s14_post,acmw,na,1,label
+#67263_s16_pre,acmw,na,1,label
+#67268_s16_post,acmw,na,1,label
+#67270_acmw_sep22,acmw,na,1,label
+#67275_s18_post,acmw,na,1,67275
+#67280_s19_post,acmw,na,1,67280
+#
+#70829_acmw_apr23,acmw,na,1,label
+#70831,acmw,na,1,label
+#70839,acmw,na,1,label
+#70847,acmw,na,1,label
+#70855,acmw,na,1,70855
+#70874,acmw,na,1,label
+#70882,acmw,na,1,label
+#70888,acmw,na,1,label
+#70895,acmw,na,1,label
+#70897,acmw,na,1,label
+#70905,acmw,na,1,label
+#
+#
+# --------------------------------------------------------------------------- #
+# RB2210326 MARCH 2022 STRUCTURAL DATA (pH 5.5)
+#
+#65083_65084_s01_pre,acmw_dlipid_,d31_POPC:DOPE:SM:chol,40:20:6:34,d31-POPC-EEM ACMW
+#65102+65103_65104_s01_post,acmw_dlip_2,d31_POPC:DOPE:SM:chol,40:20:6:34,S01 d31-POPC-EEM ACMW hLNPs
+#
+#65145_65146_s02_post,acmw_hlipid_2,POPC:DOPE:SM:chol,40:20:6:34,S02 hEEM ACMW dDSPC-LNPs
+#
+#65164+65165_65166_s03_post,acmw_hlipid_2,POPC:DOPE:SM:chol,40:20:6:34,S03 hEEM ACMW dChol-LNPs
+#
+#65105_65106_s04_pre,acmw_dlipid,POPC:DOPE:SM:d45_chol,40:20:6:34,d45-Chol-EEM ACMW
+#65124+65125_65126_s04_post,acmw_dlip_2,POPC:DOPE:SM:d45_chol,40:20:6:34,S04 d45-Chol-EEM ACMW hLNPs
+#
+#65171_65172_s05_pre,acmw_hlipid,POPC:DOPE:SM:chol,40:20:6:34,h-EEM ACMW
+#65190+65191_65192_s05_post,acmw_hlip_2,POPC:DOPE:SM:chol,40:20:6:34,S05 h-EEM ACMW dmc3-LNPs
+#
+#65193_65194_s06_pre,d2o_hlipid,POPC:DOPE:SM:chol,40:20:6:34,h-EEM D2O
+#65213_65214_s06_post,d2o_hlip_2,POPC:DOPE:SM:chol,40:20:6:34,S06 h-EEM D2O hLNPs
+#
+#65230+65231+65232_s07,acmw_noMono,na,0,S07 ACMW dmc3-LNPs
+#65248+65249+65250_s08,acmw_noMono,na,0,S08 ACMW dDSPC-LNPs
+#65266+65267+65268_s10,acmw_noMono,na,0,S10 ACMW dChol-LNPs
+#
+#
+# --------------------------------------------------------------------------- #
+# RB2220322 SEP 2022 STRUCTURAL DATA (pH 5.5)
+#
+#67185+67187_67186_s01_pre,acmw_dlipid,POPC:DOPE:SM:d45_chol,40:20:6:34,d45-Chol-EEM ACMW
+#67188_sliced_8106_9457+67188_sliced_9457_10808+67189_67190_s01_post,acmw_dlipid_2,POPC:DOPE:SM:d45_chol,40:20:6:34,S01 dEEM-dChol ACMW hmc3-LNPs
+#
+# 67191 removed due to low bkg
+#67191_67192_s02_pre,acmw_dlipid,POPC:DOPE:SM:d45_chol,40:20:6:34,d45-Chol-EEM ACMW
+#67193_sliced_9456.16_10807+67194_67195_s02_post,acmw_dlipid_2,POPC:DOPE:SM:d45_chol,40:20:6:34,S02 dEEM-dChol ACMW hLipid5 LNPs
+#
+#67196_67197_s03_pre,acmw_hlipid,POPC:DOPE:SM:chol,40:20:6:34,h-EEM ACMW
+#67199+67198_sliced_9457_10808_67200_s03_post,acmw_hlipid_2,POPC:DOPE:SM:chol,40:20:6:34,S03 hEEM ACMW pH 5.5 dlipid5-LNPs
+#
+#67205+67203_sliced_9456.16_10807_s04_post,acmw_hlipid_2,POPC:DOPE:SM:chol,40:20:6:34,S04 hEEM ACMW pH 5.5 dmc3-LNPs
+#
+#67207+67206_sliced_9456.16_10807_67208_s05_post,d2o_hlipid_2,POPC:DOPE:SM:chol,40:20:6:34,S05 hEEM D2O pH 5.5 hLipid5-LNPs
+#
+#67210+67209_sliced_9456.16_10807_67211_s06_post,acmw_hlipid_2,POPC:DOPE:SM:chol,40:20:6:34,S06 hEEM ACMW pH 5.5 hmc3-LNPs
+#
+#67214+67213_sliced_9457_10808_67215_s07_post,acmw_hlipid_2,POPC:DOPE:SM:chol,40:20:6:34,S07 hEEM ACMW pH 5.5 dChol-hLipid5-LNPs
+#
+#67219+67218_sliced_2404.66_3606.99_67220_s08_post,acmw_hlipid_2,POPC:DOPE:SM:chol,40:20:6:34,S08 hEEM ACMW pH 5.5 dDSPC-hLipid5-LNPs
+#
+#67221_67222_s09_pre,acmw_dlipid_5,d31_POPC:DOPE:SM:chol,40:20:6:34,d31-POPC-EEM ACMW
+#67226+67225_sliced_2404.66_3606.99_67227_s09_post,acmw_dlipid_2,d31_POPC:DOPE:SM:chol,40:20:6:34,S09 dEEM-dPOPC ACMW hLipid5-LNPs
+#
+#67256+67255_sliced_2404_3606_67257_s14_post,acmw_hlipid_2,POPC:DOPE:SM:chol,40:20:6:34,S14 hEEM ACMW pH 5.5 hLipid5-LNPs
+#
+#
+# --------------------------------------------------------------------------- #
+# RB2220322 SEP 2022 STRUCTURAL DATA (pH 6.5)
+#
+#67231+67233+67230_sliced_2404.66_3606.99_67232_s10_post,acmw_hlipid_2,POPC:DOPE:SM:chol,40:20:6:34,S10 hEEM ACMW pH 6.5 dmc3-LNPs
+#
+#67237+67236_sliced_2404.66_3606.99_67238_s11_post,acmw_hlipid_2,POPC:DOPE:SM:chol,40:20:6:34,S11 hEEM ACMW pH 6.5 dChol-hmc3-LNPs
+#
+#67246_67247_s13_pre,acmw_dlipid,POPC:DOPE:SM:d45_chol,40:20:6:34,d45-Chol-EEM ACMW
+#67251+67250_sliced_2405.34_3608_67252_s13_post,acmw_dlipid_2,POPC:DOPE:SM:d45_chol,40:20:6:34,S13 dEEM-dChol ACMW pH 6.5 hmc3-LNPs
+#
+#67263_67264_s16_pre,acmw_dlipid_2,d31_POPC:DOPE:SM:chol,40:20:6:34,d31-POPC-EEM ACMW
+#67268+67267_sliced_2404.66_3606.99_67269_s16_post,acmw_dlipid_2,d31_POPC:DOPE:SM:chol,40:20:6:34,S16 dEEM-dPOPC ACMW pH 6.5 hmc3-LNPs
+#
+#67239_67240_s12_pre,acmw_hlipid,POPC:DOPE:SM:chol,40:20:6:34,h-EEM ACMW
+#67244+67243_sliced_2404_3606_67245_s12_post,acmw_hlipid_2,POPC:DOPE:SM:chol,40:20:6:34,S12 hEEM ACMW pH 6.5 dDSPC-hmc3-LNPs
+#
+#67261+67260_sliced_2405.34_3608_67262_s15_post,d2o_hlipid,POPC:DOPE:SM:chol,40:20:6:34,S14 hEEM D2O pD 6.9 hmc3-LNPs
+#
+#67270_67271_s17_bare,acmw,POPC:DOPE:SM:chol,40:20:6:34,S17 ACMW pH 6.5
+#
+#67275+67274_sliced_2404.66_3606.99_67276_s18_post,acmw_hlipid_2,POPC:DOPE:SM:chol,40:20:6:34,S18 hEEM ACMW pH 6.5 dLipid5-LNPs
+#
+#67280+67279_sliced_2405.34_3608_67281_s19_post,acmw_hlipid_2,POPC:DOPE:SM:chol,40:20:6:34,S19 hEEM ACMW pH 6.5 hmc3-LNPs
+#
+#
+# --------------------------------------------------------------------------- #
+# RB2310503 APR 2023 STRUCTURAL DATA (all but one at pH 6.5)
+#
+# D2O
+#70822+70823_70824,d2o,na,1,D2O
+#
+# ACMW
+#70829_70830,acmw,na,1,ACMW pH 6.5
+#
+# ACMW hEMM P=15 PRE LNP addition pH 6.5
+70831_70832,acmw_hlipid,POPC:DOPE:SM:chol,40:20:6:34,h-EEM ACMW
+#
+# ACMW hEMM 6.5 P=15 after 25m 6s injection of d-DSPC/Lipid V/LNPs post-kinetic
+#70839_70840,acmw_hlipid,POPC:DOPE:SM:chol,40:20:6:34,hEEM ACMW pH 6.5 d-DSPC h-Lipid5 LNPs
+#
+# ACMW hEMM 6.5 P=15 after injection of d-MC3/LNPs post-kinetic
+#70847_70848,acmw_hlipid,POPC:DOPE:SM:chol,40:20:6:34,hEEM ACMW pH 6.5 d-MC3 LNPs
+#
+# ACMW hEMM 6.5 P=15 after injection of h-Lipid V/LNPs post-kinetic
+#70855_70856,acmw_hlipid,POPC:DOPE:SM:chol,40:20:6:34,hEEM ACMW pH 6.5 h-Lipid5 LNPs
+#
+# D2O 6.9 P=15 PRE addition of h-LNP to h-EEM
+70857_70858,d2o_hlipid,POPC:DOPE:SM:chol,40:20:6:34,h-EEM D2O
+#
+# D2O 6.9 P=15 after injection of 24m 26s h-Lipid V/LNPs post-kinetic
+#70865+70866_70867,d2o_hlipid,POPC:DOPE:SM:chol,40:20:6:34,hEEM D2O pD 6.9 h-Lipid5 LNPs
+#
+# ACMW pH 5.5 h-EEM P=15 after 25m 3s injection of d-MC3 LNPs post-kinetic
+#70874_70875,acmw_hlipid,POPC:DOPE:SM:chol,40:20:6:34,hEEM ACMW pH 5.5 d-MC3 LNPs
+#
+# ACMW pH 6.5 h-EEM P=15 after 24m 59s injection of d-chol/Lipid V/LNPs post-kinetic
+#70882_70883,acmw_hlipid,POPC:DOPE:SM:chol,40:20:6:34,hEEM ACMW pH 6.5 d-chol h-Lipid5 LNPs
+#
+# ACMW pH 6.5 d-POPC-EEM 26m 22s P=15 PRE addition of LNP to d-POPC EMM
+70888_70889,acmw_dlipid,d31_POPC:DOPE:SM:chol,40:20:6:34,d31-POPC-EEM ACMW
+#
+# ACMW pH 6.5 d-POPC-EEM P=15 after injection of h-Lipid V/LNPs post-kinetic
+#70895_70896,acmw_dlipid,d31_POPC:DOPE:SM:chol,40:20:6:34,d-POPC EEM ACMW pH 6.5 h-Lipid5 LNPs
+#
+# ACMW pH 6.5 d-chol-EEM P=15 25m 20s PRE addition of LNP to d-chol EEM
+70897_70898,acmw_dlipid,POPC:DOPE:SM:d45_chol,40:20:6:34,d45-Chol-EEM ACMW
+#
+# ACMW pH 6.5 d-chol-EEM P=15 25m 18s after injection of h-Lipid V/LNPs post-kinetic
+#70905_70906,acmw_dlipid,POPC:DOPE:SM:d45_chol,40:20:6:34,d-chol EEM ACMW pH 6.5 h-Lipid5 LNPs
+#
+#
+# --------------------------------------------------------------------------- #

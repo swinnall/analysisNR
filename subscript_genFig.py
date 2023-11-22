@@ -1,6 +1,5 @@
 import plotly.graph_objects as go
 import plotly.io as pio
-# pio.renderers.default='svg'
 pio.kaleido.scope.default_format = "png"
 import config
 
@@ -37,9 +36,9 @@ class Figure:
         idx_colour = 0
 
 
-        for Q_exp, R_exp, R_err_exp, Q_model, R_model, label in zip(\
+        for Q_exp, R_exp, R_err_exp, label in zip(\
                 sampleInfo['Q_exp'],sampleInfo['R_exp'],sampleInfo['R_err_exp'],\
-                sampleInfo['Q_model'],sampleInfo['R_model'],sampleInfo['label'],\
+                    sampleInfo['label'],\
                 ):
 
             # plot experimental data points on top of the model trace
@@ -52,31 +51,50 @@ class Figure:
                                     visible=True),
                             showlegend=True,
                             name=label,
+
                             mode='markers',
-                            marker_symbol=config.marker_symbol,
-                            marker_color=config.col_light[idx_colour],
-                            marker=dict(size=config.marker_size),
-                            )
+                            opacity=config.opacity,
+                            marker=dict(
+                                        color=config.col_dark[idx_colour],
+                                        symbol=config.marker_symbol[idx_colour],
+                                        size=config.marker_size,
+                                        line=dict(
+                                            color='black',
+                                            width=0.5,
+                                            ),
+                                        )
                         )
-
-            # add model trace
-            self.fig.add_trace(go.Scatter(
-                            x=Q_model,
-                            y=R_model,
-                            showlegend=False,
-                            name=label,
-                            mode='lines',
-                            line=dict(width=config.line_width,
-                                      color=config.col_dark[idx_colour]),
-                            )
-                        )
-
-            # update index to move to next colour
+                )
             idx_colour += 1
 
 
+        if config.plotOnlyExp == False:
+
+            idx_colour = 0
+            for Q_model, R_model, label in zip(\
+                    sampleInfo['Q_model'],sampleInfo['R_model'],sampleInfo['label'],\
+                    ):
+
+                # add model trace
+                self.fig.add_trace(go.Scatter(
+                                x=Q_model,
+                                y=R_model,
+                                showlegend=False,
+                                name=label,
+                                mode='lines',
+                                line=dict(width=config.line_width,
+                                          color=config.col_light[idx_colour]
+                                          ),
+                                )
+                            )
+
+                # update index to move to next colour
+                idx_colour += 1
+
+
+
         self.fig.update_layout(font=dict(family='Latex',
-                                 size=24,
+                                 size=26,
                                  color='black'
                                  ),
                                 autosize=False,
@@ -86,16 +104,17 @@ class Figure:
                                 plot_bgcolor='white',
                                 showlegend = True,
                                 legend=dict(
-                                            x=0.4,
-                                            y=1,
+                                            x=config.legend_x,
+                                            y=config.legend_y,
                                             bgcolor='rgba(0,0,0,0)',
+                                            title=config.legend_title,
                                             ),
-                                legend_font_size=16,
+                                legend_font_size=config.legend_fs,
                                 )
 
 
         self.fig.update_xaxes(title_text=r'$\huge{ \rm{Q \ \left[\mathring{A}^{-1}\right] }}$',
-                          range=[0,0.35],
+                          range=config.xrange,
                           #automargin=False,
                           showline= True,
                           linecolor= 'black',
@@ -105,7 +124,7 @@ class Figure:
                           tickwidth=3,
                           tickcolor='black',
                           tickfont=dict(family='Latex',
-                                                size=18,
+                                                size=20,
                                                 color='black',
                                                 ),
                           type='linear',
@@ -125,7 +144,7 @@ class Figure:
                           tickwidth=3,
                           tickcolor='black',
                           tickfont=dict(family='Latex',
-                                                size=18,
+                                                size=20,
                                                 color='black',
                                                 ),
                           title_standoff=10,
@@ -133,7 +152,7 @@ class Figure:
                           #tickformat = ".1SI", #".1r",
                           exponentformat ="power",
                           nticks=5,
-                          range=[-6.2,0.2] # log range by exponent: 10^0=1, 10^5=100000
+                          range=config.yrange
                           )
 
 
@@ -217,13 +236,27 @@ class Figure:
                          title_standoff=20,
                          )
 
+    def reorder(self):
+
+        self.fig.data = (self.fig.data[2],self.fig.data[1],self.fig.data[3],\
+                        self.fig.data[0],\
+                        )
+
 
     def save_figure(self,title):
 
-        # PNG, sizes are in pixels: e.g. 700 by 500
-        outputDir = '../output/fit-'+title+'.png'
-        self.fig.write_image(outputDir) #, width=700*300,height=500*300,scale=1)
+        # define file name via prefix
+        if config.plotOnlyExp == True:
+            prefix = 'raw-'
+        else:
+            prefix = 'fit-'
 
+        # PNG, sizes are in pixels: e.g. 700 by 500
+        outputDir = '../output/'+prefix+title+'.png'
+        self.fig.write_image(outputDir,scale=5) #, width=700*300,height=500*300,scale=1)
+
+        #outputDir = '../output/'+prefix+title+'.svg'
+        #self.fig.write_image(outputDir)
         # SVG, sizes are inches * dpi
         # outputDir = '../output/fit-'+title+'.svg'
         # fig.write_image(outputDir,width=1*720,height=0.714*720,scale=1)
